@@ -19,12 +19,24 @@
       <div class="navbar-inner">
         <div class="container">
           <img src="{% static "logo.gif" %}" alt="Picture of logo" height="120" width="120"/>
-          <div class="nav-collapse collapse">
+          <div class="nav-collapse collapse" style="font-size: 20px">
+              <ul class ="nav-collapse collaspe">
+                  {% if user.is_authenticated %}
+               <form class="navbar-form pull-right">
+                  <li class="navbar-txt"> Welcome {{ user.username}}!
+                  <input type="button" class="btn" value ="Sign out" onClick="window.location.href='http://127.0.0.1:8000/go_fish/logout/'" ></li>
+               </form>
+                  {% else %}
+                <!-- <li class="navbar-txt">Welcome Stranger!</li>
+
+                  <!--<li><a href="/go_fish/logout/" </li>-->
             <form class="navbar-form pull-right">
               <input class="span2" type="text" placeholder="Email">
               <input class="span2" type="password" placeholder="Password">
-              <button type="submit" class="btn">Sign in</button>
+              <input type="button" class="btn" value ="Sign in" onClick="window.location.href='http://127.0.0.1:8000/go_fish/login/'" >
+                {% endif %}
             </form>
+              </ul>
           </div><!--/.nav-collapse -->
         </div>
       </div>

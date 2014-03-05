@@ -6,11 +6,22 @@
 	<div class="hero-unit" style="background-color:white !important;">
 	{% load static %}
 	<center>
-        <h1>Welcome to Go Fish!</h1><br />
-        <img src="{% static "logo.gif" %}" alt="Picture of logo" /> 
-	<br>
-	<br>
-	 <form><input class="btn btn-primary"  type="button" value="Register" onClick="window.location.href='http://127.0.0.1:8000/go_fish/register/'"  style="width:250px !important; height:60px !important; font-size:24px;"></form> 
+         {% if user.is_authenticated %}
+                  <h1>Hi {{ user.username}}! Welcome to</h1>
+                  <img src="{% static "logo.gif" %}" alt="Picture of logo" />
+                  <br/>
+                  <br/>
+                  <form><input class="btn btn-primary"  type="button" value="Play" onClick="window.location.href='http://127.0.0.1:8000/go_fish/play/'"  style="width:250px !important; height:60px !important; font-size:24px;"></form>
+                  {% else %}
+                  <h1>Welcome to Go Fish!</h1><br />
+                  <img src="{% static "logo.gif" %}" alt="Picture of logo" />
+                  <br/>
+                  <br/>
+                  <form><input class="btn btn-primary"  type="button" value="Register" onClick="window.location.href='http://127.0.0.1:8000/go_fish/register/'"  style="width:250px !important; height:60px !important; font-size:24px;"></form>
+                  {% endif %}
+       <!-- <img src="{% static "logo.gif" %}" alt="Picture of logo" /> -->
+
+	<!-- <form><input class="btn btn-primary"  type="button" value="Register" onClick="window.location.href='http://127.0.0.1:8000/go_fish/register/'"  style="width:250px !important; height:60px !important; font-size:24px;"></form> -->
         <form><input class="btn btn-success" type="button" value="How to Play" onClick="window.location.href='http://127.0.0.1:8000/go_fish/help/'" style="width:250px !important;"></form>
 	</center>
 	</div>

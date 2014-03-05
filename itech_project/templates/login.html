@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% block title %}{% endblock %}
+{% block body_block %}
+
+	<div class="hero-unit" style="background-color:white !important;">
+{% load static %}
+
+
+        <h1>Login to Go Fish!</h1>
+
+        <form id="login_form" method="post" action="go_fish/login">
+
+            {% csrf_token %}
+            Username:<input type="text" name="username" value="" size="50" />
+            <br/>
+            Password: <input type="password" name="password" value="" size="50" />
+            <br/>
+
+            <input type="submit" value="submit" />
+        </form>
+        </div>
+
+{% endblock %}

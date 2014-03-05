@@ -167,3 +167,4 @@ LOGGING = {
         },
     }
 }
+LOGIN_URL = '/go_fish/welcome/'
