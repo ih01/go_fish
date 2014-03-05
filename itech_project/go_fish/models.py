@@ -29,7 +29,7 @@ class UserProfile(models.Model):
     rod = models.ForeignKey(Rod)
     boat = models.ForeignKey(Boat)
     bait = models.ForeignKey(Bait)
-    picture = models.ImageField(upload_to='profile_image', blank=True)
+    #picture = models.ImageField(upload_to='profile_image', blank=True) #still working on picture
     def __unicode__(self):
         return unicode(self.user)
 
