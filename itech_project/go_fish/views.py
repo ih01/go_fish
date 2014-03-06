@@ -6,8 +6,10 @@ from django.contrib.auth import authenticate, login
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
+from game_control import *
+from game import MakeGame
 
-from go_fish.models import Rod, Boat, Bait
+from go_fish.models import Rod, Boat, Bait, Game
 
 def welcome(request):
 
@@ -88,7 +90,34 @@ def user_logout(request):
     return HttpResponseRedirect('/go_fish/welcome/')
 
 def play(request):
-    return HttpResponse("Placeholder for play page")
+    context = RequestContext(request, {})
+    session_id = request.session._get_or_create_session_key()
+    us = request.user
+    game = new_game(us)
+    coords = int(str(game.posX) + str(game.posY))
+    return render_to_response('Play.html', {'us':us, 'game':game, 'coords':coords})
+
+def fish(request):
+    context = RequestContext(request, {})
+    us = request.user
+    game = load_game(us)
+    fishCaught = game.fish(us)
+    save_game(us, game)
+    coords = int(str(game.posX) + str(game.posY))
+    return render_to_response('Play.html', {'us':us, 'game':game, 'fishCaught':fishCaught, 'coords':coords})
+
+def move(request, moveTo):
+    context = RequestContext(request, {})
+    us = request.user
+    game = load_game(us)
+    moveX= int(moveTo[0])
+    moveY= int(moveTo[1])
+    save_game(us, game)
+    game.move(us, moveX, moveY)
+    save_game(us, game)
+    coords = int(str(game.posX) + str(game.posY))
+    return render_to_response('Play.html', {'us':us, 'game':game,  'coords':coords, 'moveTo': moveTo})
+
 def help(request):
     return HttpResponse("Placeholder for help page")
 def shop(request):

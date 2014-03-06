@@ -31,7 +31,6 @@ def new_game(user):
 	
 	#Store in the DB
 	Game.objects.get_or_create(user=user, pickledgame=picGame)
-        return newGame
 	
 
 

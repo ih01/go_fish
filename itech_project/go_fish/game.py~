@@ -81,6 +81,5 @@ class MakeGame(object):
 		self.fishTotal += fish_caught
 
 		#return the fish caught this round
-		return fish_caught
 	
 	
