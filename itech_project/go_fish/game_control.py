@@ -13,7 +13,7 @@ from random import randint
 from django.core.management import setup_environ
 setup_environ(settings)
 from models import Game
-from game import CurrentGame
+from game import MakeGame
 #imported as pickle just in case someone
 #wants to revert to regular pickle later
 import cPickle as pickle
@@ -41,7 +41,7 @@ def load_game(user):
 	users_game = Game.objects.get(user=user)
 
 	#unpickle it back to an object and return it
-	game = pickle.loads(users_game.pickledgame)
+	game = pickle.loads(str(users_game.pickledgame))
 	return game
 	
 	

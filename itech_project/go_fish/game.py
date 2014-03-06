@@ -63,7 +63,7 @@ class MakeGame(object):
 	#for now just dish out random number
 	#fish generation being handled seperately
 
-	def fish(user):
+	def fish(self, user):
 
 		#reduce time left by fishing time
 		self.time_left -= self.FISH_TIME
@@ -72,7 +72,7 @@ class MakeGame(object):
 		user_prof = UserProfile.objects.get(user=user)
 		
 		#call to fish generation will go here
-		basic_fish = (randint(1, 20)
+		basic_fish = (randint(1, 20))
 		
 		#apply multipliers
 		fish_caught = basic_fish*(user_prof.rod.fishMod)*(user_prof.bait.fishMod)
@@ -82,6 +82,5 @@ class MakeGame(object):
 
 		#return the fish caught this round
 		return fish_caught
-
-
+	
 	
