@@ -90,15 +90,12 @@ def user_logout(request):
     return HttpResponseRedirect('/go_fish/welcome/')
 
 def play(request):
-    context = RequestContext(request, {})
-    session_id = request.session._get_or_create_session_key()
     us = request.user
     game = new_game(us)
     coords = int(str(game.posX) + str(game.posY))
     return render_to_response('Play.html', {'us':us, 'game':game, 'coords':coords})
 
 def fish(request):
-    context = RequestContext(request, {})
     us = request.user
     game = load_game(us)
     fishCaught = game.fish(us)
@@ -107,7 +104,6 @@ def fish(request):
     return render_to_response('Play.html', {'us':us, 'game':game, 'fishCaught':fishCaught, 'coords':coords})
 
 def move(request, moveTo):
-    context = RequestContext(request, {})
     us = request.user
     game = load_game(us)
     moveX= int(moveTo[0])
