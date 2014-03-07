@@ -22,15 +22,16 @@ import cPickle as pickle
 #and store it in the DB
 def new_game(user):
 
-	#see if duplicate game check needed here
-	#create a new game
-	newGame = MakeGame()
+
+	
+		newGame = MakeGame()
 
 	#pickle the object into a string
 	picGame = pickle.dumps(newGame)
 	
 	#Store in the DB
 	Game.objects.get_or_create(user=user, pickledgame=picGame)
+        return newGame
 	
 
 

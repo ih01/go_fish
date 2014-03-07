@@ -9,7 +9,7 @@ from django.contrib.auth import logout
 from game_control import *
 from game import MakeGame
 
-from go_fish.models import Rod, Boat, Bait, Game
+from go_fish.models import Rod, Boat, Bait, Game, UserProfile
 
 def welcome(request):
 
@@ -91,7 +91,13 @@ def user_logout(request):
 
 def play(request):
     us = request.user
-    game = new_game(us)
+    user_prof = UserProfile.objects.get(user=us)
+    if user_prof.hasCurrentGame is False:
+    	game = new_game(us)
+	user_prof.hasCurrentGame=True
+	user_prof.save()
+    else:
+	 game = load_game(us)
     coords = int(str(game.posX) + str(game.posY))
     return render_to_response('Play.html', {'us':us, 'game':game, 'coords':coords})
 
@@ -108,7 +114,6 @@ def move(request, moveTo):
     game = load_game(us)
     moveX= int(moveTo[0])
     moveY= int(moveTo[1])
-    save_game(us, game)
     game.move(us, moveX, moveY)
     save_game(us, game)
     coords = int(str(game.posX) + str(game.posY))

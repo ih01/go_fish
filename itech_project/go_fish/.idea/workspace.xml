@@ -26,7 +26,7 @@
       <file leaf-file-name="views.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="107" column="0" selection-start="3642" selection-end="3642" vertical-scroll-proportion="0.9479167" vertical-offset="909" max-vertical-offset="1605">
+            <state line="122" column="0" selection-start="4117" selection-end="4117" vertical-scroll-proportion="0.9479167" vertical-offset="1119" max-vertical-offset="1815">
               <folding />
             </state>
           </provider>
@@ -38,6 +38,13 @@
     <FindUsagesManager>
       <setting name="OPEN_NEW_TAB" value="false" />
     </FindUsagesManager>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="changedFiles">
+      <list>
+        <option value="$PROJECT_DIR$/views.py" />
+      </list>
+    </option>
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="67" />
@@ -326,7 +333,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="107" column="0" selection-start="3642" selection-end="3642" vertical-scroll-proportion="0.9479167" vertical-offset="909" max-vertical-offset="1605">
+        <state line="122" column="0" selection-start="4117" selection-end="4117" vertical-scroll-proportion="0.9479167" vertical-offset="1119" max-vertical-offset="1815">
           <folding />
         </state>
       </provider>

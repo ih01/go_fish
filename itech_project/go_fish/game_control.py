@@ -22,6 +22,7 @@ import cPickle as pickle
 #and store it in the DB
 def new_game(user):
 
+
 	#see if duplicate game check needed here
 	#create a new game
 	newGame = MakeGame()

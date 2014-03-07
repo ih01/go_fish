@@ -30,6 +30,7 @@ class UserProfile(models.Model):
     boat = models.ForeignKey(Boat)
     bait = models.ForeignKey(Bait)
     #picture = models.ImageField(upload_to='profile_image', blank=True) #still working on picture
+    hasCurrentGame = models.BooleanField(default=False)
     def __unicode__(self):
         return unicode(self.user)
 
