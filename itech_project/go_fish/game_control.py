@@ -12,7 +12,7 @@ from itech_project import settings
 from random import randint
 from django.core.management import setup_environ
 setup_environ(settings)
-from models import Game
+from models import Game, UserProfile, Rod, Boat, Bait
 from game import MakeGame
 #imported as pickle just in case someone
 #wants to revert to regular pickle later
@@ -60,8 +60,46 @@ def save_game(user, game):
 	#update it with new game state and save to DB
 	users_game.pickledgame = saveGame
 	users_game.save()
-	
 
+
+#resets a users game to a new game
+def reset_game(user)
+	
+	#find the users current game
+	currentGame = Game.objects.get(user=user)
+
+	#Make a new game
+	next_game = MakeGame()
+
+	#replace the old game with the new one
+	currentGame.pickledgame = next_game
+	currentGame.save()
+
+
+#gets the modifier for the users boat
+def get_boatMod(user)
+	
+	#get user profile info
+	user_prof = UserProfile.objects.get(user=user)
+	#return the modifier
+	return user_prof.boat.timeMod
+
+#gets modifier for users rod
+def get_rodMod(user)
+
+	#get user profile info
+	user_prof = UserProfile.objects.get(user=user)
+	#return the modifier
+	return user_prof.rod.fishMod
+
+
+#gets modifier for users bait
+def get_baitMod(user)
+
+	#get user profile info
+	user_prof = UserProfile.objects.get(user=user)
+	#return the modifier
+	return user_prof.bait.fishMod
 
 
 	

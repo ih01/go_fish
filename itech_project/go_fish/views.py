@@ -104,7 +104,9 @@ def play(request):
 def fish(request):
     us = request.user
     game = load_game(us)
-    fishCaught = game.fish(us)
+	baitMod = get_baitMod(us)
+	rodMod = get_rodMod(us)
+    fishCaught = game.fish(rodMod, baitMod)
     save_game(us, game)
     coords = int(str(game.posX) + str(game.posY))
     return render_to_response('Play.html', {'us':us, 'game':game, 'fishCaught':fishCaught, 'coords':coords})
@@ -114,7 +116,8 @@ def move(request, moveTo):
     game = load_game(us)
     moveX= int(moveTo[0])
     moveY= int(moveTo[1])
-    game.move(us, moveX, moveY)
+	boatMod = get_boatMod()
+    game.move(moveX, moveY, boatMod)
     save_game(us, game)
     coords = int(str(game.posX) + str(game.posY))
     return render_to_response('Play.html', {'us':us, 'game':game,  'coords':coords, 'moveTo': moveTo})
