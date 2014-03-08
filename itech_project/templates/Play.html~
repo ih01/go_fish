@@ -2,6 +2,12 @@
 {% extends 'base.html' %}
 {% block title %}{% endblock %}
 {% block body_block %}
+{% if Game_Over %}
+<div class="hero-unit" style="background-color:white !important;">
+Game Over!
+</div>
+{% else %}
+
 <div class="hero-unit" style="background-color:white !important;">
 	
 	<center>
@@ -19,32 +25,32 @@
               <div class="span2">{% ifequal coords 4 %} Pos {% else %} <a href="http://127.0.0.1:8000/go_fish/move/04">04</a> {% endifequal %}</div>
             </div>
             <div class="row show-grid">
-              <div class="span2">{% ifequal coords 10 %} Pos {% else %} <a href="http://127.0.0.1:8000/go_fish/move/00">10</a> {% endifequal %}</div>
-              <div class="span2">{% ifequal coords 11 %} Pos {% else %} <a href="http://127.0.0.1:8000/go_fish/move/01">11</a>  {% endifequal %}</div>
-              <div class="span2">{% ifequal coords 12 %} Pos {% else %} <a href="http://127.0.0.1:8000/go_fish/move/02">12</a> {% endifequal %}</div>
-              <div class="span2">{% ifequal coords 13 %} Pos {% else %} <a href="http://127.0.0.1:8000/go_fish/move/03">13</a> {% endifequal %}</div>
-              <div class="span2">{% ifequal coords 14 %} Pos {% else %} <a href="http://127.0.0.1:8000/go_fish/move/04">14</a> {% endifequal %}</div>
+              <div class="span2">{% ifequal coords 10 %} Pos {% else %} <a href="http://127.0.0.1:8000/go_fish/move/10">10</a> {% endifequal %}</div>
+              <div class="span2">{% ifequal coords 11 %} Pos {% else %} <a href="http://127.0.0.1:8000/go_fish/move/11">11</a>  {% endifequal %}</div>
+              <div class="span2">{% ifequal coords 12 %} Pos {% else %} <a href="http://127.0.0.1:8000/go_fish/move/12">12</a> {% endifequal %}</div>
+              <div class="span2">{% ifequal coords 13 %} Pos {% else %} <a href="http://127.0.0.1:8000/go_fish/move/13">13</a> {% endifequal %}</div>
+              <div class="span2">{% ifequal coords 14 %} Pos {% else %} <a href="http://127.0.0.1:8000/go_fish/move/14">14</a> {% endifequal %}</div>
             </div>
             <div class="row show-grid">
-              <div class="span2">{% ifequal coords 20 %} Pos {% else %} <a href="http://127.0.0.1:8000/go_fish/move/00">20</a> {% endifequal %}</div>
-              <div class="span2">{% ifequal coords 21 %} Pos {% else %} <a href="http://127.0.0.1:8000/go_fish/move/01">21</a>  {% endifequal %}</div>
-              <div class="span2">{% ifequal coords 22 %} Pos {% else %} <a href="http://127.0.0.1:8000/go_fish/move/02">22</a> {% endifequal %}</div>
-              <div class="span2">{% ifequal coords 23 %} Pos {% else %} <a href="http://127.0.0.1:8000/go_fish/move/03">23</a> {% endifequal %}</div>
-              <div class="span2">{% ifequal coords 24 %} Pos {% else %} <a href="http://127.0.0.1:8000/go_fish/move/04">24</a> {% endifequal %}</div>
+              <div class="span2">{% ifequal coords 20 %} Pos {% else %} <a href="http://127.0.0.1:8000/go_fish/move/20">20</a> {% endifequal %}</div>
+              <div class="span2">{% ifequal coords 21 %} Pos {% else %} <a href="http://127.0.0.1:8000/go_fish/move/21">21</a>  {% endifequal %}</div>
+              <div class="span2">{% ifequal coords 22 %} Pos {% else %} <a href="http://127.0.0.1:8000/go_fish/move/22">22</a> {% endifequal %}</div>
+              <div class="span2">{% ifequal coords 23 %} Pos {% else %} <a href="http://127.0.0.1:8000/go_fish/move/23">23</a> {% endifequal %}</div>
+              <div class="span2">{% ifequal coords 24 %} Pos {% else %} <a href="http://127.0.0.1:8000/go_fish/move/24">24</a> {% endifequal %}</div>
             </div>
             <div class="row show-grid">
-              <div class="span2">{% ifequal coords 30 %} Pos {% else %} <a href="http://127.0.0.1:8000/go_fish/move/00">30</a> {% endifequal %}</div>
-              <div class="span2">{% ifequal coords 31 %} Pos {% else %} <a href="http://127.0.0.1:8000/go_fish/move/01">31</a>  {% endifequal %}</div>
-              <div class="span2">{% ifequal coords 32 %} Pos {% else %} <a href="http://127.0.0.1:8000/go_fish/move/02">32</a> {% endifequal %}</div>
-              <div class="span2">{% ifequal coords 33 %} Pos {% else %} <a href="http://127.0.0.1:8000/go_fish/move/03">33</a> {% endifequal %}</div>
-              <div class="span2">{% ifequal coords 34 %} Pos {% else %} <a href="http://127.0.0.1:8000/go_fish/move/04">34</a> {% endifequal %}</div>
+              <div class="span2">{% ifequal coords 30 %} Pos {% else %} <a href="http://127.0.0.1:8000/go_fish/move/30">30</a> {% endifequal %}</div>
+              <div class="span2">{% ifequal coords 31 %} Pos {% else %} <a href="http://127.0.0.1:8000/go_fish/move/31">31</a>  {% endifequal %}</div>
+              <div class="span2">{% ifequal coords 32 %} Pos {% else %} <a href="http://127.0.0.1:8000/go_fish/move/32">32</a> {% endifequal %}</div>
+              <div class="span2">{% ifequal coords 33 %} Pos {% else %} <a href="http://127.0.0.1:8000/go_fish/move/33">33</a> {% endifequal %}</div>
+              <div class="span2">{% ifequal coords 34 %} Pos {% else %} <a href="http://127.0.0.1:8000/go_fish/move/34">34</a> {% endifequal %}</div>
             </div>
 	    <div class="row show-grid">
-              <div class="span2">{% ifequal coords 40 %} Pos {% else %} <a href="http://127.0.0.1:8000/go_fish/move/00">40</a> {% endifequal %}</div>
-              <div class="span2">{% ifequal coords 41 %} Pos {% else %} <a href="http://127.0.0.1:8000/go_fish/move/01">41</a>  {% endifequal %}</div>
-              <div class="span2">{% ifequal coords 42 %} Pos {% else %} <a href="http://127.0.0.1:8000/go_fish/move/02">42</a> {% endifequal %}</div>
-              <div class="span2">{% ifequal coords 43 %} Pos {% else %} <a href="http://127.0.0.1:8000/go_fish/move/03">43</a> {% endifequal %}</div>
-              <div class="span2">{% ifequal coords 44 %} Pos {% else %} <a href="http://127.0.0.1:8000/go_fish/move/04">44</a> {% endifequal %}</div>
+              <div class="span2">{% ifequal coords 40 %} Pos {% else %} <a href="http://127.0.0.1:8000/go_fish/move/40">40</a> {% endifequal %}</div>
+              <div class="span2">{% ifequal coords 41 %} Pos {% else %} <a href="http://127.0.0.1:8000/go_fish/move/41">41</a>  {% endifequal %}</div>
+              <div class="span2">{% ifequal coords 42 %} Pos {% else %} <a href="http://127.0.0.1:8000/go_fish/move/42">42</a> {% endifequal %}</div>
+              <div class="span2">{% ifequal coords 43 %} Pos {% else %} <a href="http://127.0.0.1:8000/go_fish/move/43">43</a> {% endifequal %}</div>
+              <div class="span2">{% ifequal coords 44 %} Pos {% else %} <a href="http://127.0.0.1:8000/go_fish/move/44">44</a> {% endifequal %}</div>
             </div>
 
           </div>
@@ -69,5 +75,5 @@ Went to: {{ moveTo }}
 	</div>
 
 
-
+{% endif %}
 {% endblock %}

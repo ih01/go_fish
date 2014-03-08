@@ -6,9 +6,11 @@ import random
 # 7 = high yield
 
 # base fish count on a field
-STDFISH = 5
+	STDFISH = 5
 
 class yieldGenerator(object):
+
+	
 
 	# constructor
 	def __init__(self):

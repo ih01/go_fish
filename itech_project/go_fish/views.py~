@@ -46,6 +46,7 @@ def register(request):
             profile.bait = initial_bait
 
             profile.user = user
+            new_game(user)
            # if 'picture' in request.FILES:
                # profile.picture = request.FILES['picture']
 
@@ -92,32 +93,40 @@ def user_logout(request):
 def play(request):
     us = request.user
     user_prof = UserProfile.objects.get(user=us)
-    if user_prof.hasCurrentGame is False:
-    	game = new_game(us)
-	user_prof.hasCurrentGame=True
-	user_prof.save()
-    else:
-	 game = load_game(us)
-       
-    return render_to_response('Play.html', {'us':us, 'game':game})
+    game = load_game(us)
+    coords = int(str(game.posX) + str(game.posY))
+    return render_to_response('Play.html', {'us':us, 'game':game, 'coords':coords})
 
 def fish(request):
     us = request.user
     game = load_game(us)
-    fishCaught = game.fish(us)
+    baitMod = get_baitMod(us)
+    rodMod = get_rodMod(us)
+    fishCaught = game.fish(rodMod, baitMod)
     save_game(us, game)
+    game_over=False
+    if game.time_left<1:
+	game.reset()
+	game_over=True
+        save_game(us, game)
     coords = int(str(game.posX) + str(game.posY))
-    return render_to_response('Play.html', {'us':us, 'game':game, 'fishCaught':fishCaught, 'coords':coords})
+    return render_to_response('Play.html', {'us':us, 'game':game, 'fishCaught':fishCaught, 'coords':coords, 'Game_Over':game_over})
 
 def move(request, moveTo):
     us = request.user
     game = load_game(us)
     moveX= int(moveTo[0])
     moveY= int(moveTo[1])
-    game.move(us, moveX, moveY)
+    boatMod = get_boatMod(us)
+    game.move(moveX, moveY, boatMod)
     save_game(us, game)
+    game_over=False
+    if game.time_left<1:
+	game.reset()
+	game_over=True
+        save_game(us, game)
     coords = int(str(game.posX) + str(game.posY))
-    return render_to_response('Play.html', {'us':us, 'game':game,  'coords':coords, 'moveTo': moveTo})
+    return render_to_response('Play.html', {'us':us, 'game':game,  'coords':coords, 'moveTo': moveTo, 'Game_Over':game_over})
 
 def help(request):
     return HttpResponse("Placeholder for help page")

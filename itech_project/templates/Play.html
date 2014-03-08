@@ -2,6 +2,12 @@
 {% extends 'base.html' %}
 {% block title %}{% endblock %}
 {% block body_block %}
+{% if Game_Over %}
+<div class="hero-unit" style="background-color:white !important;">
+Game Over!
+</div>
+{% else %}
+
 <div class="hero-unit" style="background-color:white !important;">
 	
 	<center>
@@ -69,5 +75,5 @@ Went to: {{ moveTo }}
 	</div>
 
 
-
+{% endif %}
 {% endblock %}

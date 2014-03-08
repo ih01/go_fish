@@ -5,10 +5,11 @@
 #import data needed from other models
 import os
 from itech_project import settings
-from yield_gen import yieldGenertator
+from yield_gen import yieldGenerator
 from django.core.management import setup_environ
 setup_environ(settings)
 from models import UserProfile, Rod, Boat, Bait
+from random import randint
 
 #Create and store a new game
 #with default values of 0, standard equipment
@@ -57,6 +58,11 @@ class MakeGame(object):
 		self.posX = newX
 		self.posY = newY
 
+	def reset(self):
+		self.time_left = 480
+		self.posX = 0
+		self.posY = 0
+	        self.fishTotal = 0
 	
 	
 	#function for fishing
@@ -72,7 +78,7 @@ class MakeGame(object):
 		basic_fish = (randint(1, 20))
 		
 		#apply multipliers
-		fish_caught = generator.deplete(self.posX, self.posY, rod_mod, bait_mod)
+		fish_caught = self.generator.deplete(self.posX, self.posY, rod_mod, bait_mod)
 
 		#update fish total
 		self.fishTotal += fish_caught

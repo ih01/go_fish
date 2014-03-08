@@ -9,7 +9,6 @@
 #already done this?
 import os
 from itech_project import settings
-from random import randint
 from django.core.management import setup_environ
 setup_environ(settings)
 from models import Game, UserProfile, Rod, Boat, Bait
@@ -63,7 +62,7 @@ def save_game(user, game):
 
 
 #resets a users game to a new game
-def reset_game(user)
+def reset_game(user):
 	
 	#find the users current game
 	currentGame = Game.objects.get(user=user)
@@ -77,7 +76,7 @@ def reset_game(user)
 
 
 #gets the modifier for the users boat
-def get_boatMod(user)
+def get_boatMod(user):
 	
 	#get user profile info
 	user_prof = UserProfile.objects.get(user=user)
@@ -85,7 +84,7 @@ def get_boatMod(user)
 	return user_prof.boat.timeMod
 
 #gets modifier for users rod
-def get_rodMod(user)
+def get_rodMod(user):
 
 	#get user profile info
 	user_prof = UserProfile.objects.get(user=user)
@@ -94,7 +93,7 @@ def get_rodMod(user)
 
 
 #gets modifier for users bait
-def get_baitMod(user)
+def get_baitMod(user):
 
 	#get user profile info
 	user_prof = UserProfile.objects.get(user=user)

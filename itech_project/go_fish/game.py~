@@ -5,10 +5,11 @@
 #import data needed from other models
 import os
 from itech_project import settings
-from random import randint
+from yield_gen import yieldGenerator
 from django.core.management import setup_environ
 setup_environ(settings)
 from models import UserProfile, Rod, Boat, Bait
+from random import randint
 
 #Create and store a new game
 #with default values of 0, standard equipment
@@ -27,6 +28,9 @@ class MakeGame(object):
 		self.posX = X_COORD
 		self.posY = Y_COORD
 		self.fishTotal = TOTAL_FISH
+		#need to include new yeild generator for each new game
+		#here so it is saved when game is stored
+		self.generator = yieldGenerator()
 		
 	#basic time used to fish - FISH_TIME
 	#basic per square move time - BASIC_MOVE
@@ -39,16 +43,13 @@ class MakeGame(object):
 	#needs to be passed user object
 	#timeMod comes from boat class
 
-	def move(self, user, newX, newY):
+	def move(self, newX, newY, moveMod):
 		#calculate distance moved
 		distance = abs(newX - self.posX)
 		distance += abs(newY - self.posY)
-	
-		#access users profile to get current equipment
-		user_prof = UserProfile.objects.get(user=user)
-			
+
 		#calculate move time
-		move_time = distance*self.BASIC_MOVE*(user_prof.boat.timeMod)
+		move_time = distance*self.BASIC_MOVE*moveMod
 	
 		#update time left
 		self.time_left -= move_time
@@ -57,29 +58,32 @@ class MakeGame(object):
 		self.posX = newX
 		self.posY = newY
 
+	def reset(self):
+		self.time_left = 480
+		self.posX = 0
+		self.posY = 0
+	        self.fishTotal = 0
 	
 	
 	#function for fishing
 	#for now just dish out random number
 	#fish generation being handled seperately
 
-	def fish(self, user):
+	def fish(self, rod_mod, bait_mod):
 
 		#reduce time left by fishing time
 		self.time_left -= self.FISH_TIME
-		
-		#access users profile to get current equipment
-		user_prof = UserProfile.objects.get(user=user)
 		
 		#call to fish generation will go here
 		basic_fish = (randint(1, 20))
 		
 		#apply multipliers
-		fish_caught = basic_fish*(user_prof.rod.fishMod)*(user_prof.bait.fishMod)
+		fish_caught = generator.deplete(self.posX, self.posY, rod_mod, bait_mod)
 
 		#update fish total
 		self.fishTotal += fish_caught
 
 		#return the fish caught this round
+		return fish_caught
 	
 	
