@@ -67,19 +67,20 @@ def reset_game(user):
 	#find the users current game
 	currentGame = Game.objects.get(user=user)
 
-	#Make a new game
-	next_game = MakeGame()
+	#Make a new game and pickle it
+	new_game = MakeGame()
+	next_game = pickle.dumps(new_game)
 
 	#replace the old game with the new one
 	currentGame.pickledgame = next_game
 	currentGame.save()
 
 #Adds fish to money
-def fishToMoney(user, fish):
+def fishToMoney(user, game):
 	#get user profile info
 	user_prof = UserProfile.objects.get(user=user)
 	#changes fish into money
-	user_prof.balance+=fish
+	user_prof.balance += game.sell_fish()
 	#save changes
 	user_prof.save()
 

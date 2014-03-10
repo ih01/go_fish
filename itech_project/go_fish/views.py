@@ -110,12 +110,11 @@ def fish(request):
     fishCaught = game.fish(rodMod, baitMod)
     save_game(us, game)
     game_over=False
-    if game.time_left<1:
-	fishToMoney(us, game.fishTotal)
-	game.reset()
+    if (game.get_time())<1:
+	fishToMoney(us, game)
+	reset_game(us)
 	game_over=True
-        save_game(us, game)
-    coords = int(str(game.posX) + str(game.posY))
+    coords = int(str(game.get_X()) + str(game.get_Y()))
     return render_to_response('Play.html', {'user_prof':user_prof, 'game':game, 'fishCaught':fishCaught, 'coords':coords, 'Game_Over':game_over})
 
 def move(request, moveTo):
@@ -128,13 +127,12 @@ def move(request, moveTo):
     game.move(moveX, moveY, boatMod)
     save_game(us, game)
     game_over=False
-    if game.time_left<1:
-	fishToMoney(us, game.fishTotal)
-	game.reset()
+    if (game.get_time())<1:
+	fishToMoney(us, game)
+	reset_game(us)
 	game_over=True
-        save_game(us, game)
-    coords = int(str(game.posX) + str(game.posY))
-    return render_to_response('Play.html', {'user_prof':user_prof, 'game':game,  'coords':coords, 'moveTo': moveTo, 'Game_Over':game_over})
+    coords = int(str(game.get_X()) + str(game.get_Y()))
+    return render_to_response('Play.html', {'user_prof':user_prof, 'game':game, 'coords':coords, 'moveTo': moveTo, 'Game_Over':game_over})
 
 def help(request):
     return HttpResponse("Placeholder for help page")

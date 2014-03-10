@@ -8,8 +8,6 @@ from itech_project import settings
 from yield_gen import yieldGenerator
 from django.core.management import setup_environ
 setup_environ(settings)
-from models import UserProfile, Rod, Boat, Bait
-from random import randint
 
 #Create and store a new game
 #with default values of 0, standard equipment
@@ -58,12 +56,6 @@ class MakeGame(object):
 		self.posX = newX
 		self.posY = newY
 
-	def reset(self):
-		self.time_left = 480
-		self.posX = 0
-		self.posY = 0
-	        self.fishTotal = 0
-		self.generator = yieldGenerator()
 	
 	
 	#function for fishing
@@ -75,9 +67,6 @@ class MakeGame(object):
 		#reduce time left by fishing time
 		self.time_left -= self.FISH_TIME
 		
-		#call to fish generation will go here
-		basic_fish = (randint(1, 20))
-		
 		#apply multipliers
 		fish_caught = self.generator.deplete(self.posX, self.posY, rod_mod, bait_mod)
 
@@ -87,4 +76,36 @@ class MakeGame(object):
 		#return the fish caught this round
 		return fish_caught
 	
+
+
+	#function to facilitate selling fish
+	#returns total number of fish
+	#and resets total fish count to zero
+	def sell_fish(self):
+		
+		#keep a note of total
+		fishExchanged = self.fishTotal
+
+		#reset game total to zero
+		self.fishTotal = 0
+
+		return fishExchanged
+	
+
+
+	#some functions for returning values
+	#to aid decoupling
+
+	#Returning time left	
+	def get_time(self):
+		return self.time_left
+
+	#return x coordinate
+	def get_X(self):
+		return self.posX
+
+	#return y coordinate
+	def get_Y(self):
+		return self.posY
+
 	

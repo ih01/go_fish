@@ -12,15 +12,15 @@ def populate():
 	# Rods
 	rod1=add_rod(name="Wooden Fishing Rod",
 	cost="0",
-	fishMod="2")
+	fishMod="1")
 	
 	rod2=add_rod(name="Iron Fishing Rod",
 	cost="100",
-	fishMod="4")
+	fishMod="2")
 	
 	rod3=add_rod(name="Steel Fishing Rod",
 	cost="500",
-	fishMod="6")
+	fishMod="4")
 
 	rod4=add_rod(name="Mithril Fishing Rod",
 	cost="1000",
@@ -29,19 +29,19 @@ def populate():
 	# Boats	
 	boat1=add_boat(name="Raft",
 	cost="0",
-	timeMod="2")
+	timeMod="1")
 	
 	boat2=add_boat(name="Kayak",
 	cost="100",
-	timeMod="4")
+	timeMod="0.75")
 
 	boat3=add_boat(name="Motor boat",
 	cost="500",
-	timeMod="6")
+	timeMod="0.5")
 	
 	boat4=add_boat(name="Speed boat",
 	cost="1000",
-	timeMod="8")
+	timeMod="0.25")
 
 	# Baits	
 	bait1=add_bait(name="Worm",
