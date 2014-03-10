@@ -7,7 +7,7 @@
 	{% load static %}
 	<center>
          {% if user.is_authenticated %}
-                  <h1>Hi {{ user.username}}! Welcome to</h1>
+                  <h1>Hi {{ user.username}}! <br/>Welcome to</h1>
                   <img src="{% static "logo.gif" %}" alt="Picture of logo" />
                   <br/>
                   <br/>

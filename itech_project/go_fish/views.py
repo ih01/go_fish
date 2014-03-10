@@ -8,7 +8,6 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from game_control import *
 from game import MakeGame
-
 from go_fish.models import Rod, Boat, Bait, Game, UserProfile
 
 def welcome(request):
@@ -52,6 +51,9 @@ def register(request):
 
             profile.save()
             registered = True
+            #log newly registered user in straight away
+            user = authenticate(username=request.POST['username'], password=request.POST['password'])
+            login(request, user)
 
         else:
             print user_form.errors, profile_form.errors
@@ -85,10 +87,12 @@ def user_login(request):
             return HttpResponse("Invalid login details supplied.")
     else:
         return render_to_response('login.html', {}, context)
+
 @login_required
 def user_logout(request):
     logout(request)
     return HttpResponseRedirect('/go_fish/welcome/')
+
 
 def play(request):
     us = request.user
@@ -139,4 +143,4 @@ def shop(request):
 
 @login_required
 def restricted(request):
-    return HttpResponse("this is restricted...but you can see it because you are cool!")
+    return HttpResponse("this is restricted...")
