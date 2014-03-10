@@ -63,6 +63,7 @@ class MakeGame(object):
 		self.posX = 0
 		self.posY = 0
 	        self.fishTotal = 0
+		self.generator = yieldGenerator()
 	
 	
 	#function for fishing

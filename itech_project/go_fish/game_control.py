@@ -74,6 +74,15 @@ def reset_game(user):
 	currentGame.pickledgame = next_game
 	currentGame.save()
 
+#Adds fish to money
+def fishToMoney(user, fish):
+	#get user profile info
+	user_prof = UserProfile.objects.get(user=user)
+	#changes fish into money
+	user_prof.balance+=fish
+	#save changes
+	user_prof.save()
+
 
 #gets the modifier for the users boat
 def get_boatMod(user):

@@ -9,7 +9,6 @@
 #already done this?
 import os
 from itech_project import settings
-from random import randint
 from django.core.management import setup_environ
 setup_environ(settings)
 from models import Game, UserProfile, Rod, Boat, Bait
@@ -74,6 +73,15 @@ def reset_game(user):
 	#replace the old game with the new one
 	currentGame.pickledgame = next_game
 	currentGame.save()
+
+#Adds fish to money
+def fishToMoney(user, fish):
+	#get user profile info
+	user_prof = UserProfile.objects.get(user=user)
+	#changes fish into money
+	user_prof.balance+=fish
+	money=user_prof.balance
+	user_prof.save()
 
 
 #gets the modifier for the users boat

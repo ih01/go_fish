@@ -78,7 +78,7 @@ class MakeGame(object):
 		basic_fish = (randint(1, 20))
 		
 		#apply multipliers
-		fish_caught = generator.deplete(self.posX, self.posY, rod_mod, bait_mod)
+		fish_caught = self.generator.deplete(self.posX, self.posY, rod_mod, bait_mod)
 
 		#update fish total
 		self.fishTotal += fish_caught

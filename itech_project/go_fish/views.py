@@ -95,10 +95,11 @@ def play(request):
     user_prof = UserProfile.objects.get(user=us)
     game = load_game(us)
     coords = int(str(game.posX) + str(game.posY))
-    return render_to_response('Play.html', {'us':us, 'game':game, 'coords':coords})
+    return render_to_response('Play.html', {'user_prof':user_prof, 'game':game, 'coords':coords})
 
 def fish(request):
     us = request.user
+    user_prof = UserProfile.objects.get(user=us)
     game = load_game(us)
     baitMod = get_baitMod(us)
     rodMod = get_rodMod(us)
@@ -106,14 +107,16 @@ def fish(request):
     save_game(us, game)
     game_over=False
     if game.time_left<1:
+	fishToMoney(us, game.fishTotal)
 	game.reset()
 	game_over=True
         save_game(us, game)
     coords = int(str(game.posX) + str(game.posY))
-    return render_to_response('Play.html', {'us':us, 'game':game, 'fishCaught':fishCaught, 'coords':coords, 'Game_Over':game_over})
+    return render_to_response('Play.html', {'user_prof':user_prof, 'game':game, 'fishCaught':fishCaught, 'coords':coords, 'Game_Over':game_over})
 
 def move(request, moveTo):
     us = request.user
+    user_prof = UserProfile.objects.get(user=us)
     game = load_game(us)
     moveX= int(moveTo[0])
     moveY= int(moveTo[1])
@@ -122,11 +125,12 @@ def move(request, moveTo):
     save_game(us, game)
     game_over=False
     if game.time_left<1:
+	fishToMoney(us, game.fishTotal)
 	game.reset()
 	game_over=True
         save_game(us, game)
     coords = int(str(game.posX) + str(game.posY))
-    return render_to_response('Play.html', {'us':us, 'game':game,  'coords':coords, 'moveTo': moveTo, 'Game_Over':game_over})
+    return render_to_response('Play.html', {'user_prof':user_prof, 'game':game,  'coords':coords, 'moveTo': moveTo, 'Game_Over':game_over})
 
 def help(request):
     return HttpResponse("Placeholder for help page")
