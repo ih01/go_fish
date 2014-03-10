@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% block title %}{% endblock %}
+{% block body_block %}
+
+	<div class="hero-unit" style="background-color:white !important;">
+   {% load static %}
+
+       <h1>Go Fish! Shop</h1>
+       <br/>
+       Current Rod: {{user_rod}}
+       Current Boat: {{User_boat}}
+       Current Bait: {{User_bait}}
+       <br/>
+       Current Balance: {{User_balance}}
+       <br/>
+       Rods Available: {{ allRoads }}
+       <br/>
+       Boats Available: {{ allBoats }}
+       <br/>
+       Bait Available: {{ allBait }}
+
+   </div>
+
+{% endblock %}
