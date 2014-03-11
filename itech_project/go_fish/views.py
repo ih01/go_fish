@@ -136,17 +136,18 @@ def move(request, moveTo):
 
 def help(request):
     return HttpResponse("Placeholder for help page")
+
 def shop(request):
-    user = request.user.id
+    user = request.user
     user_profile = UserProfile.objects.get(user=user)
     user_balance = user_profile.balance
     user_rod = user_profile.rod.name
     user_boat = user_profile.boat.name
     user_bait = user_profile.bait.name
-    allRods = Rod.object.all()
-    allBoats = Boat.object.all()
-    allBait = Bait.object.all()
-    return HttpResponse('shop.html', {'user_balance': user_balance, 'user_rod': user_rod, 'user_boat': user_boat,
+    allRods = Rod.objects.all()
+    allBoats = Boat.objects.all()
+    allBait = Bait.objects.all()
+    return render_to_response('shop.html', {'user_balance': user_balance, 'user_rod': user_rod, 'user_boat': user_boat,
                                      'user_bait': user_bait, 'allRods': allRods, 'allBoats': allBoats,
                                      'allBait': allBait, })
 

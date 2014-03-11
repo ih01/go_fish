@@ -10,9 +10,7 @@
        <h1>Go Fish! Shop</h1>
        <br/>
        Current Rod: {{user_rod}}
-       <br/>
        Current Boat: {{user_boat}}
-       <br/>
        Current Bait: {{user_bait}}
        <br/>
        Current Balance: {{user_balance}}
