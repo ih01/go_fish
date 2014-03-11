@@ -8,6 +8,7 @@
    {% load static %}
 
        <h1>Go Fish! Shop</h1>
+
        <br/>
        Current Rod: {{user_rod}}
        <br/>
@@ -17,11 +18,30 @@
        <br/>
        Current Balance: {{user_balance}}
        <br/>
-       Rods Available: {{ allRods }}
        <br/>
-       Boats Available: {{ allBoats }}
+
+       Rods Available:
        <br/>
-       Bait Available: {{ allBait }}
+       <br/>{% ifequal user_rod "Wooden Fishing Rod" %} {{firstRod}} {% else %} <a href="http://127.0.0.1:8000/go_fish/buy/wooden_fishing_rod">{{firstRod}}</a>{% endifequal %}
+       <br/>{% ifequal user_rod "Iron Fishing Rod" %} {{secondRod}} {% else %} <a href="http://127.0.0.1:8000/go_fish/buy/iron_fishing_rod">{{secondRod}}</a>{% endifequal %}
+       <br/>{% ifequal user_rod "Steel Fishing Rod" %} {{thirdRod}} {% else %} <a href="http://127.0.0.1:8000/go_fish/buy/steel_fishing_rod">{{thirdRod}}</a>{% endifequal %}
+       <br/>{% ifequal user_rod "Mithril Fishing Rod" %} {{fourthRod}} {% else %} <a href="http://127.0.0.1:8000/go_fish/buy/mithril_fishing_rod">{{fourthRod}}</a>{% endifequal %}
+        <br/>
+        <br/>
+       Boats Available:
+       <br/>
+       <br/>{% ifequal user_boat "Raft" %} {{firstBoat}} {% else %} <a href="http://127.0.0.1:8000/go_fish/buy/raft">{{firstBoat}}</a>{% endifequal %}
+       <br/>{% ifequal user_boat "Kayak" %} {{secondBoat}} {% else %} <a href="http://127.0.0.1:8000/go_fish/buy/kayak">{{secondBoat}}</a>{% endifequal %}
+       <br/>{% ifequal user_boat "Motor boat" %} {{thirdBoat}} {% else %} <a href="http://127.0.0.1:8000/go_fish/buy/motor_boat">{{thirdBoat}}</a>{% endifequal %}
+       <br/>{% ifequal user_boat "Speed boat" %} {{fourthBoat}} {% else %} <a href="http://127.0.0.1:8000/go_fish/buy/speed_boat">{{fourthBoat}}</a>{% endifequal %}
+        <br/>
+        <br/>
+       Bait Available:
+        <br/>
+        <br/>{% ifequal user_bait "Worm" %} {{firstBait}} {% else %} <a href="http://127.0.0.1:8000/go_fish/buy/worm">{{firstBait}}</a>{% endifequal %}
+        <br/>{% ifequal user_bait "Basic Lure" %} {{secondBait}} {% else %} <a href="http://127.0.0.1:8000/go_fish/buy/basic_lure">{{secondBait}}</a>{% endifequal %}
+        <br/>{% ifequal user_bait "Advanced Lure" %} {{thirdBait}} {% else %} <a href="http://127.0.0.1:8000/go_fish/buy/advanced_lure">{{thirdBait}}</a>{% endifequal %}
+        <br/>{% ifequal user_bait "Bucket O'Bait" %} {{fourthBait}} {% else %} <a href="http://127.0.0.1:8000/go_fish/buy/bucket_o_bait">{{fourthBait}}</a>{% endifequal %}
 
    </div>
 

@@ -8,7 +8,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from game_control import *
 from game import MakeGame
-from go_fish.models import Rod, Boat, Bait, Game, UserProfile
+from models import Rod, Boat, Bait, Game, UserProfile
+from shop import Shop
 
 def welcome(request):
 
@@ -138,18 +139,58 @@ def help(request):
     return HttpResponse("Placeholder for help page")
 
 def shop(request):
-    user = request.user
+    user = request.user.id
     user_profile = UserProfile.objects.get(user=user)
     user_balance = user_profile.balance
     user_rod = user_profile.rod.name
     user_boat = user_profile.boat.name
     user_bait = user_profile.bait.name
-    allRods = Rod.objects.all()
-    allBoats = Boat.objects.all()
-    allBait = Bait.objects.all()
+    firstRod = Rod.objects.get(pk=1)
+    secondRod = Rod.objects.get(pk=2)
+    thirdRod = Rod.objects.get(pk=3)
+    fourthRod = Rod.objects.get(pk=4)
+    firstBoat = Boat.objects.get(pk=1)
+    secondBoat = Boat.objects.get(pk=2)
+    thirdBoat = Boat.objects.get(pk=3)
+    fourthBoat = Boat.objects.get(pk=4)
+    firstBait = Bait.objects.get(pk=1)
+    secondBait = Bait.objects.get(pk=2)
+    thirdBait = Bait.objects.get(pk=3)
+    fourthBait = Bait.objects.get(pk=4)
     return render_to_response('shop.html', {'user_balance': user_balance, 'user_rod': user_rod, 'user_boat': user_boat,
-                                     'user_bait': user_bait, 'allRods': allRods, 'allBoats': allBoats,
-                                     'allBait': allBait, })
+                                     'user_bait': user_bait, 'firstRod': firstRod, 'secondRod': secondRod,
+                                     'thirdRod': thirdRod, 'fourthRod': fourthRod, 'firstBoat': firstBoat,
+                                     'secondBoat': secondBoat, 'thirdBoat': thirdBoat, 'fourthBoat': fourthBoat,
+                                     'firstBait': firstBait, 'secondBait': secondBait, 'thirdBait': thirdBait,
+                                     'fourthBait': fourthBait})
+
+def buy(request, item):
+    user = request.user.id
+    newItem = item.replace('_', ' ')
+    shop.buyItem(newItem, user)
+    user_profile = UserProfile.objects.get(user=user)
+    user_balance = user_profile.balance
+    user_rod = user_profile.rod.name
+    user_boat = user_profile.boat.name
+    user_bait = user_profile.bait.name
+    firstRod = Rod.objects.get(pk=1)
+    secondRod = Rod.objects.get(pk=2)
+    thirdRod = Rod.objects.get(pk=3)
+    fourthRod = Rod.objects.get(pk=4)
+    firstBoat = Boat.objects.get(pk=1)
+    secondBoat = Boat.objects.get(pk=2)
+    thirdBoat = Boat.objects.get(pk=3)
+    fourthBoat = Boat.objects.get(pk=4)
+    firstBait = Bait.objects.get(pk=1)
+    secondBait = Bait.objects.get(pk=2)
+    thirdBait = Bait.objects.get(pk=3)
+    fourthBait = Bait.objects.get(pk=4)
+    return render_to_response('shop.html', {'user_balance': user_balance, 'user_rod': user_rod, 'user_boat': user_boat,
+                                     'user_bait': user_bait, 'firstRod': firstRod, 'secondRod': secondRod,
+                                     'thirdRod': thirdRod, 'fourthRod': fourthRod, 'firstBoat': firstBoat,
+                                     'secondBoat': secondBoat, 'thirdBoat': thirdBoat, 'fourthBoat': fourthBoat,
+                                     'firstBait': firstBait, 'secondBait': secondBait, 'thirdBait': thirdBait,
+                                     'fourthBait': fourthBait})
 
 
 @login_required

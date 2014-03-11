@@ -6,21 +6,21 @@ class Rod(models.Model):
     cost = models.IntegerField(max_length=5)
     fishMod = models.DecimalField(max_digits=5,decimal_places=2)
     def __unicode__(self):
-        return unicode(self.name)
+        return unicode(self.name) + " Cost: " + unicode(self.cost) + " Fish Modifier: " + unicode(self.fishMod)
 
 class Boat(models.Model):
     name = models.CharField(max_length=20)
     cost = models.IntegerField(max_length=5)
     timeMod = models.DecimalField(max_digits=5,decimal_places=2)
     def __unicode__(self):
-        return unicode(self.name)
+        return unicode(self.name) + " Cost: " + unicode(self.cost) + " Time Modifier: " + unicode(self.timeMod)
 
 class Bait(models.Model):
     name = models.CharField(max_length=20)
     cost = models.IntegerField(max_length=5)
     fishMod = models.DecimalField(max_digits=5,decimal_places=2)
     def __unicode__(self):
-        return unicode(self.name)
+        return unicode(self.name) + " Cost: " + unicode(self.cost) + " Fish Modifier: " + unicode(self.fishMod)
 
 
 class UserProfile(models.Model):
