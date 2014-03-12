@@ -2,8 +2,8 @@
 #processes movement and fishing
 
 #import data needed from other models
-#import os
-#from itech_project import settings
+import os
+from itech_project import settings
 from yield_gen import yieldGenerator
 from django.core.management import setup_environ
 setup_environ(settings)
