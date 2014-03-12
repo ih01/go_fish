@@ -31,4 +31,4 @@ class Shop(object):
         elif item_type == type(Bait):
             update.bait = item
         else:
-        print "error"
+			print "error"
