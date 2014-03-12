@@ -110,11 +110,7 @@ def fish(request):
     rodMod = get_rodMod(us)
     fishCaught = game.fish(rodMod, baitMod)
     save_game(us, game)
-    game_over=False
-    if (game.get_time())<1:
-	fishToMoney(us, game)
-	reset_game(us)
-	game_over=True
+    game_over = check_end_game(us, game)
     coords = int(str(game.get_X()) + str(game.get_Y()))
     return render_to_response('Play.html', {'user_prof':user_prof, 'game':game, 'fishCaught':fishCaught, 'coords':coords, 'Game_Over':game_over})
 
@@ -127,11 +123,7 @@ def move(request, moveTo):
     boatMod = get_boatMod(us)
     game.move(moveX, moveY, boatMod)
     save_game(us, game)
-    game_over=False
-    if (game.get_time())<1:
-	fishToMoney(us, game)
-	reset_game(us)
-	game_over=True
+    game_over = check_end_game(us, game)
     coords = int(str(game.get_X()) + str(game.get_Y()))
     return render_to_response('Play.html', {'user_prof':user_prof, 'game':game, 'coords':coords, 'moveTo': moveTo, 'Game_Over':game_over})
 

@@ -1,12 +1,9 @@
 #functions for controlling
 #loading/saving and creation of games
-#all functions pickle data to
+#functions pickle data to
 #or unpickle from the DB
-# -- not yet tested --
 
 #import data needed from other models
-#may not be needed if calling module has
-#already done this?
 import os
 from itech_project import settings
 from django.core.management import setup_environ
@@ -83,7 +80,24 @@ def fishToMoney(user, game):
 	user_prof.balance += game.sell_fish()
 	#save changes
 	user_prof.save()
+	
+	
+#Helps process the end of the game
+def check_end_game(user, game):
+	#check if game is over
+	#by looking at time left
+	if (game.get_time())<1:
+		#sell all fish
+		fishToMoney(user, game)
+	
+		#reset game for a new day
+		reset_game(user)
+		
+		return True
+	else:
+		return False
 
+		
 
 #gets the modifier for the users boat
 def get_boatMod(user):
