@@ -13,5 +13,6 @@ urlpatterns = patterns('',
     url(r'^restricted/', views.restricted, name='restricted'),
     url(r'^move/(?P<moveTo>\w+)/$', views.move, name='move'),
     url(r'buy/(?P<item>\w+)/$', views.buy, name='buy'),
+    url(r'^profile/$', views.profile, name='profile'),
     )
 

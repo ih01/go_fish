@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}Profile{% endblock %}
+
+{% block body_block %}
+<div class="hero-unit">
+    <h1> Your Profile! <h1> <br/>
+    <h2>{{ user.username }}</h2>
+    <p>Current Rod: {{ userprofile.rod }} </p>
+    <p>Current Boat: {{ userprofile.boat }} </p>
+    <p>Current Bait: {{ userprofile.bait }} </p>
+    <p>You have {{ userprofile.fishAmount }} fish </p>
+    <p>You have {{ userprofile.balance }} gold coins </p>
+</div>
+{% endblock %}

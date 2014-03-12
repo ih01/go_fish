@@ -10,6 +10,8 @@ from game_control import *
 from game import MakeGame
 from models import Rod, Boat, Bait, Game, UserProfile
 from shop import Shop
+from django.contrib.auth.models import User
+
 
 def welcome(request):
 
@@ -47,8 +49,8 @@ def register(request):
 
             profile.user = user
             new_game(user)
-           # if 'picture' in request.FILES:
-               # profile.picture = request.FILES['picture']
+            if 'picture' in request.FILES:
+               profile.picture = request.FILES['picture']
 
             profile.save()
             registered = True
@@ -96,13 +98,15 @@ def user_logout(request):
 
 
 def play(request):
+    context = RequestContext(request)
     us = request.user
     user_prof = UserProfile.objects.get(user=us)
     game = load_game(us)
     coords = int(str(game.posX) + str(game.posY))
-    return render_to_response('Play.html', {'user_prof':user_prof, 'game':game, 'coords':coords})
+    return render_to_response('Play.html', {'user_prof':user_prof, 'game':game, 'coords':coords},context)
 
 def fish(request):
+    context = RequestContext(request)
     us = request.user
     user_prof = UserProfile.objects.get(user=us)
     game = load_game(us)
@@ -112,9 +116,10 @@ def fish(request):
     save_game(us, game)
     game_over = check_end_game(us, game)
     coords = int(str(game.get_X()) + str(game.get_Y()))
-    return render_to_response('Play.html', {'user_prof':user_prof, 'game':game, 'fishCaught':fishCaught, 'coords':coords, 'Game_Over':game_over})
+    return render_to_response('Play.html', {'user_prof':user_prof, 'game':game, 'fishCaught':fishCaught, 'coords':coords, 'Game_Over':game_over},context)
 
 def move(request, moveTo):
+    context = RequestContext(request)
     us = request.user
     user_prof = UserProfile.objects.get(user=us)
     game = load_game(us)
@@ -125,12 +130,13 @@ def move(request, moveTo):
     save_game(us, game)
     game_over = check_end_game(us, game)
     coords = int(str(game.get_X()) + str(game.get_Y()))
-    return render_to_response('Play.html', {'user_prof':user_prof, 'game':game, 'coords':coords, 'moveTo': moveTo, 'Game_Over':game_over})
+    return render_to_response('Play.html', {'user_prof':user_prof, 'game':game, 'coords':coords, 'moveTo': moveTo, 'Game_Over':game_over},context)
 
 def help(request):
     return HttpResponse("Placeholder for help page")
 
 def shop(request):
+    context = RequestContext(request)
     user = request.user.id
     user_profile = UserProfile.objects.get(user=user)
     user_balance = user_profile.balance
@@ -154,9 +160,10 @@ def shop(request):
                                      'thirdRod': thirdRod, 'fourthRod': fourthRod, 'firstBoat': firstBoat,
                                      'secondBoat': secondBoat, 'thirdBoat': thirdBoat, 'fourthBoat': fourthBoat,
                                      'firstBait': firstBait, 'secondBait': secondBait, 'thirdBait': thirdBait,
-                                     'fourthBait': fourthBait})
+                                     'fourthBait': fourthBait},context)
 
 def buy(request, item):
+    context = RequestContext(request)
     user = request.user.id
     newItem = item.replace('_', ' ')
     shop.buyItem(newItem, user)
@@ -182,8 +189,23 @@ def buy(request, item):
                                      'thirdRod': thirdRod, 'fourthRod': fourthRod, 'firstBoat': firstBoat,
                                      'secondBoat': secondBoat, 'thirdBoat': thirdBoat, 'fourthBoat': fourthBoat,
                                      'firstBait': firstBait, 'secondBait': secondBait, 'thirdBait': thirdBait,
-                                     'fourthBait': fourthBait})
+                                     'fourthBait': fourthBait},context)
 
+
+@login_required
+def profile(request):
+    context = RequestContext(request)
+    context_dict = {}
+    u = User.objects.get(username=request.user)
+
+    try:
+        up = UserProfile.objects.get(user=u)
+    except:
+        up = None
+
+    context_dict['user'] = u
+    context_dict['userprofile'] = up
+    return render_to_response('profile.html', context_dict, context)
 
 @login_required
 def restricted(request):
