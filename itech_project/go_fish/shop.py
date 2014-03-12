@@ -10,10 +10,10 @@ class Shop(object):
     # updates item (rod, boat, bait) and balance in database
     def buyItem(self, item, user):
 
-        if not ( self.balance > item.cost )  # user has insufficient means
+        if not ( self.balance > item.cost ):  # user has insufficient means
         return
 
-        else  # calculate new balance
+        else:  # calculate new balance
         newBalance = self.balance - item.cost
 
         update = user.get_profile()
