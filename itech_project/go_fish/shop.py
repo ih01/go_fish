@@ -11,12 +11,12 @@ class Shop(object):
     def buyItem(self, item, user):
 
         if not ( self.balance > item.cost ):  # user has insufficient means
-        return
+			return
 
         else:  # calculate new balance
-        newBalance = self.balance - item.cost
+			newBalance = self.balance - item.cost
 
-        update = user.get_profile()
+			update = user.get_profile()
 
     # update user balance
         update.balance = newBalance
