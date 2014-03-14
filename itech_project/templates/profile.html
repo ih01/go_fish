@@ -1,14 +1,14 @@
-{% extends "base.html" %}
+{% extends "base2.html" %}
 
 {% block title %}Profile{% endblock %}
 
 {% block body_block %}
-<div class="hero-unit">
+<div class="jumbotron">
     <h1> Your Profile! <h1> <br/>
     <h2>{{ user.username }}</h2>
-    <p>Current Rod: {{ userprofile.rod }} </p>
-    <p>Current Boat: {{ userprofile.boat }} </p>
-    <p>Current Bait: {{ userprofile.bait }} </p>
+    <p>Current Rod: {{ userprofile.rod.name }} </p>
+    <p>Current Boat: {{ userprofile.boat.name }} </p>
+    <p>Current Bait: {{ userprofile.bait.name }} </p>
     <p>You have {{ userprofile.fishAmount }} fish </p>
     <p>You have {{ userprofile.balance }} gold coins </p>
 </div>
