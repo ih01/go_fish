@@ -14,12 +14,11 @@ from django.contrib.auth.models import User
 
 
 def welcome(request):
-
-    context = RequestContext(request)
-
-    context_dict = {}
-
-    return render_to_response('welcome.html', context_dict, context)
+	context = RequestContext(request)
+	us = request.user
+	user_profile = UserProfile.objects.get(user=us)
+	context_dict = {'user_profile':user_profile}
+	return render_to_response('welcome.html', context_dict, context)
 
 # hopefully won't need seperate page for this
 
@@ -102,8 +101,8 @@ def play(request):
     us = request.user
     user_prof = UserProfile.objects.get(user=us)
     game = load_game(us)
-    coords = int(str(game.posX) + str(game.posY))
-    return render_to_response('Play.html', {'user_prof':user_prof, 'game':game, 'coords':coords},context)
+    coords = str(game.get_X())+ "_" + str(game.get_Y())
+    return render_to_response('Play.html', {'user_profile':user_prof, 'game':game, 'coords':coords},context)
 
 def fish(request):
     context = RequestContext(request)
@@ -115,8 +114,8 @@ def fish(request):
     fishCaught = game.fish(rodMod, baitMod)
     save_game(us, game)
     game_over = check_end_game(us, game)
-    coords = int(str(game.get_X()) + str(game.get_Y()))
-    return render_to_response('Play.html', {'user_prof':user_prof, 'game':game, 'fishCaught':fishCaught, 'coords':coords, 'Game_Over':game_over},context)
+    coords = str(game.get_X())+ "_" + str(game.get_Y())
+    return render_to_response('Play.html', {'user_profile':user_prof, 'game':game, 'fishCaught':fishCaught, 'coords':coords, 'Game_Over':game_over},context)
 
 def move(request, moveTo):
     context = RequestContext(request)
@@ -124,13 +123,13 @@ def move(request, moveTo):
     user_prof = UserProfile.objects.get(user=us)
     game = load_game(us)
     moveX= int(moveTo[0])
-    moveY= int(moveTo[1])
+    moveY= int(moveTo[2])
     boatMod = get_boatMod(us)
     game.move(moveX, moveY, boatMod)
     save_game(us, game)
     game_over = check_end_game(us, game)
-    coords = int(str(game.get_X()) + str(game.get_Y()))
-    return render_to_response('Play.html', {'user_prof':user_prof, 'game':game, 'coords':coords, 'moveTo': moveTo, 'Game_Over':game_over},context)
+    coords = str(game.get_X())+ "_" + str(game.get_Y())
+    return render_to_response('Play.html', {'user_profile':user_prof, 'game':game, 'coords':coords, 'moveTo': moveTo, 'Game_Over':game_over},context)
 
 def help(request):
     context = RequestContext(request)

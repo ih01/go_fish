@@ -3,8 +3,15 @@
 {% block title %}{% endblock %}
 {% block body_block %}
 {% if Game_Over %}
+
 <div class="hero-unit" style="background-color:white !important;">
-Game Over!
+	<center>
+<br/>
+         <div class="jumbotron">
+   {% load static %}
+
+       <h1>Game Over!</h1>
+	   </div>
 </div>
 {% else %}
 
@@ -12,71 +19,46 @@ Game Over!
 	
 	<center>
 <br/>
-         Testing Page
+         <div class="jumbotron">
+   {% load static %}
+
+       <h1>Fish Here!</h1>
+
+      
 <br/>
 <br/>
 
-<div class="bs-docs-grid">
-            <div class="row show-grid">
-              <div class="span2">{% ifequal coords 0 %} Pos {% else %} <a href="/go_fish/move/00">0</a> {% endifequal %}</div>
-              <div class="span2">{% ifequal coords 1 %} Pos {% else %} <a href="/go_fish/move/01">01</a>  {% endifequal %}</div>
-              <div class="span2">{% ifequal coords 2 %} Pos {% else %} <a href="/go_fish/move/02">02</a> {% endifequal %}</div>
-              <div class="span2">{% ifequal coords 3 %} Pos {% else %} <a href="/go_fish/move/03">03</a> {% endifequal %}</div>
-              <div class="span2">{% ifequal coords 4 %} Pos {% else %} <a href="/go_fish/move/04">04</a> {% endifequal %}</div>
-            </div>
-            <div class="row show-grid">
-              <div class="span2">{% ifequal coords 10 %} Pos {% else %} <a href="/go_fish/move/10">10</a> {% endifequal %}</div>
-              <div class="span2">{% ifequal coords 11 %} Pos {% else %} <a href="/go_fish/move/11">11</a>  {% endifequal %}</div>
-              <div class="span2">{% ifequal coords 12 %} Pos {% else %} <a href="/go_fish/move/12">12</a> {% endifequal %}</div>
-              <div class="span2">{% ifequal coords 13 %} Pos {% else %} <a href="/go_fish/move/13">13</a> {% endifequal %}</div>
-              <div class="span2">{% ifequal coords 14 %} Pos {% else %} <a href="/go_fish/move/14">14</a> {% endifequal %}</div>
-            </div>
-            <div class="row show-grid">
-              <div class="span2">{% ifequal coords 20 %} Pos {% else %} <a href="/go_fish/move/20">20</a> {% endifequal %}</div>
-              <div class="span2">{% ifequal coords 21 %} Pos {% else %} <a href="/go_fish/move/21">21</a>  {% endifequal %}</div>
-              <div class="span2">{% ifequal coords 22 %} Pos {% else %} <a href="/go_fish/move/22">22</a> {% endifequal %}</div>
-              <div class="span2">{% ifequal coords 23 %} Pos {% else %} <a href="/go_fish/move/23">23</a> {% endifequal %}</div>
-              <div class="span2">{% ifequal coords 24 %} Pos {% else %} <a href="/go_fish/move/24">24</a> {% endifequal %}</div>
-            </div>
-            <div class="row show-grid">
-              <div class="span2">{% ifequal coords 30 %} Pos {% else %} <a href="/go_fish/move/30">30</a> {% endifequal %}</div>
-              <div class="span2">{% ifequal coords 31 %} Pos {% else %} <a href="/go_fish/move/31">31</a>  {% endifequal %}</div>
-              <div class="span2">{% ifequal coords 32 %} Pos {% else %} <a href="/go_fish/move/32">32</a> {% endifequal %}</div>
-              <div class="span2">{% ifequal coords 33 %} Pos {% else %} <a href="/go_fish/move/33">33</a> {% endifequal %}</div>
-              <div class="span2">{% ifequal coords 34 %} Pos {% else %} <a href="/go_fish/move/34">34</a> {% endifequal %}</div>
-            </div>
-	    <div class="row show-grid">
-              <div class="span2">{% ifequal coords 40 %} Pos {% else %} <a href="/go_fish/move/40">40</a> {% endifequal %}</div>
-              <div class="span2">{% ifequal coords 41 %} Pos {% else %} <a href="/go_fish/move/41">41</a>  {% endifequal %}</div>
-              <div class="span2">{% ifequal coords 42 %} Pos {% else %} <a href="/go_fish/move/42">42</a> {% endifequal %}</div>
-              <div class="span2">{% ifequal coords 43 %} Pos {% else %} <a href="/go_fish/move/43">43</a> {% endifequal %}</div>
-              <div class="span2">{% ifequal coords 44 %} Pos {% else %} <a href="/go_fish/move/44">44</a> {% endifequal %}</div>
-            </div>
+<table border="0.1" color="white">
+{% for i in "01234" %}	
+	{% with is=i|stringformat:"s" %}
+    <tr>
+	{% for j in "01234" %}	
+	{% with js=j|stringformat:"s" %}
+	{% with ""|add:is|add:"_"|add:js as joined %}
+        {% ifequal coords  joined %}<td bgcolor="#026AA6" height="70px" width="70px"></td> {% else %} <td bgcolor="#2fa4e7" height="70px" width="70px"><a href="/go_fish/move/{{ joined }}"></a></td> {% endifequal %}
+	{% endwith %}
+	{% endwith %}
+    {% endfor %}
+	{% endwith %}
+	</tr>
+{% endfor %}
+</table> 
 
-          </div>
-
-        <br/>
-Time Left: {{ game.time_left}}
-<br/>
-Coords: {{ coords }}
 <br/>
 
-Total Fish: {{ game.fishTotal}}
+<h2>Time Left: {{ game.time_left}}
 <br/>
-Fish Caught: {{ fishCaught }}
 <br/>
-
-Went to: {{ moveTo }}
+You have caught {{ game.fishTotal }} fish today.
+</h2>
 <br/>
-
-Balance: {{ user_prof.balance }}
 <br/>
 
 
 <form><input class="btn btn-primary"  type="button" value="Fish" onClick="window.location.href='http://127.0.0.1:8000/go_fish/fish/'"  style="width:250px !important; height:60px !important; font-size:24px;"></form>
 	</center>
 	</div>
-
+</div>
 
 {% endif %}
 {% endblock %}
