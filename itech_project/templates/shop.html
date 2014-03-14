@@ -2,11 +2,14 @@
 {% extends 'base2.html' %}
 {% block title %}{% endblock %}
 {% block body_block %}
-<div class="hero-unit" style="background-color:white !important;">
+<div class="jumbotron" >
    {% load static %}
 
        <h1>Go Fish! Shop</h1>
+       <!-- <h2>'Jovial' comment about shopping!</h2>-->
 
+<h2>Can we lure you in with our prices...?</h2>
+   <!--<h3>
        <br/>
        Current Rod: {{ user_profile.rod.name }}
        <br/>
@@ -17,54 +20,68 @@
        Current Balance: {{ user_profile.balance }}
        <br/>
        <br/>
+</h3>-->
+</div>
 
-       Rods Available:
-       <br/>
-       <br/>
-
-       {% if rods %}
+    <div class="container-fluid">
+      <!-- Example row of columns -->
+      <div class="row">
+        <div class="col-md-4">
+          <h2>Rods Available:</h2>
+        <h4>
+             {% if rods %}
             <ul>
                     {% for Rod in rods %}
                     <li>{{ Rod.name }} <br/>Cost: {{ Rod.cost }} <br/>Modifier: {{ Rod.fishMod }}
-                    <br/> <form><input class="btn btn-primary"  type="button" value="Buy" onClick="window.location.href='http://127.0.0.1:8000/go_fish/buy/{{ Rod.level }}R'"  style="width:75px !important; height:30px !important; font-size:16px;"></form> </li>
+                    <br/><br/> <form><input class="btn btn-primary"  type="button" value="Buy" onClick="window.location.href='http://127.0.0.1:8000/go_fish/buy/{{ Rod.level }}R'"  style="width:75px !important; height:30px !important; font-size:16px;"></form> </li>
+                   <br/>
                     {% endfor %}
             </ul>
         {% else %}
             <Strong>There are no more upgrades available.</Strong>
         {% endif %}
+        </h4>
 
-        <br/>
-        Boats Available:
-        <br/> <br/>
 
-        {% if boats %}
+
+        </div>
+        <div class="col-md-4">
+          <h2>Boats Available</h2>
+        <h4>
+          {% if boats %}
             <ul>
                     {% for Boat in boats %}
                     <li>{{ Boat.name }} <br/>Cost: {{ Boat.cost }} <br/>Modifier: {{ Boat.timeMod }}
-                     <form><input class="btn btn-primary"  type="button" value="Buy" onClick="window.location.href='http://127.0.0.1:8000/go_fish/buy/{{ Boat.level }}B'"  style="width:75px !important; height:30px !important; font-size:16px;"></form> </li>
+                   <br/><br/>   <form><input class="btn btn-primary"  type="button" value="Buy" onClick="window.location.href='http://127.0.0.1:8000/go_fish/buy/{{ Boat.level }}B'"  style="width:75px !important; height:30px !important; font-size:16px;"></form> </li>
+                   <br/>
                     {% endfor %}
             </ul>
         {% else %}
             <Strong>There are no more upgrades available.</Strong>
         {% endif %}
+        </h4>
+       </div>
+        <div class="col-md-4">
+          <h2>Bait Available</h2>
+        <h4>
 
-        <br/>
-        Bait Available:
-        <br/> <br/>
 
-        {% if bait %}
+         {% if bait %}
             <ul>
                     {% for Bait in bait %}
                     <li>{{ Bait.name }} <br/>Cost: {{ Bait.cost }} <br/>Modifier: {{ Bait.fishMod }}
-                    <br/> <form><input class="btn btn-primary"  type="button" value="Buy" onClick="window.location.href='http://127.0.0.1:8000/go_fish/buy/{{ Bait.level }}b'"  style="width:75px !important; height:30px !important; font-size:16px;"></form> </li>
+                    <br/><br/> <form><input class="btn btn-primary"  type="button" value="Buy" onClick="window.location.href='http://127.0.0.1:8000/go_fish/buy/{{ Bait.level }}b'"  style="width:75px !important; height:30px !important; font-size:16px;"></form> </li>
+                   <br/>
                     {% endfor %}
             </ul>
         {% else %}
             <Strong>There are no more upgrades available.</Strong>
         {% endif %}
+        </h4>
+        </div>
+      </div>
 
 
-   </div>
 
 
 {% endblock %}

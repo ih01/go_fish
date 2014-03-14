@@ -145,6 +145,7 @@ def shop(request):
     return render_to_response('shop.html', context_dict, context)
 
 def buy(request, item):
+    context = RequestContext(request)
     item_level = item[0]
     item_type = item[1]
 
@@ -166,7 +167,7 @@ def buy(request, item):
     bait_list = Bait.objects.filter(level__gt=user_profile.bait.level)
     context_dict = {'rods': rod_list, 'boats': boat_list, 'bait': bait_list, 'user_profile': user_profile}
 
-    return render_to_response('shop.html', context_dict)
+    return render_to_response('shop.html', context_dict, context)
 
 
 @login_required
