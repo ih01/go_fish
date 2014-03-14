@@ -3,6 +3,8 @@ from django.contrib.auth.models import User
 
 class Rod(models.Model):
     name = models.CharField(max_length=20)
+    level = models.IntegerField(max_length=2)
+    type = models.CharField(max_length=20, default='Rod')
     cost = models.IntegerField(max_length=5)
     fishMod = models.DecimalField(max_digits=5,decimal_places=2)
     def __unicode__(self):
@@ -10,6 +12,8 @@ class Rod(models.Model):
 
 class Boat(models.Model):
     name = models.CharField(max_length=20)
+    level = models.IntegerField(max_length=2)
+    type = models.CharField(max_length=20, default='Boat')
     cost = models.IntegerField(max_length=5)
     timeMod = models.DecimalField(max_digits=5,decimal_places=2)
     def __unicode__(self):
@@ -17,6 +21,8 @@ class Boat(models.Model):
 
 class Bait(models.Model):
     name = models.CharField(max_length=20)
+    level = models.IntegerField(max_length=2)
+    type = models.CharField(max_length=20, default='Bait')
     cost = models.IntegerField(max_length=5)
     fishMod = models.DecimalField(max_digits=5,decimal_places=2)
     def __unicode__(self):

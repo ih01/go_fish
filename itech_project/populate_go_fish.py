@@ -11,52 +11,64 @@ def populate():
 
 	# Rods
 	rod1=add_rod(name="Wooden Fishing Rod",
+    level = "1",
 	cost="0",
 	fishMod="1")
 	
 	rod2=add_rod(name="Iron Fishing Rod",
+	level = "2",
 	cost="100",
 	fishMod="2")
 	
 	rod3=add_rod(name="Steel Fishing Rod",
+	level = "3",
 	cost="500",
 	fishMod="4")
 
 	rod4=add_rod(name="Mithril Fishing Rod",
+	level = "4",
 	cost="1000",
 	fishMod="8")
 	
 	# Boats	
 	boat1=add_boat(name="Raft",
+	level = "1",
 	cost="0",
 	timeMod="1")
 	
 	boat2=add_boat(name="Kayak",
+	level = "2",
 	cost="100",
 	timeMod="0.75")
 
 	boat3=add_boat(name="Motor boat",
+	level = "3",
 	cost="500",
 	timeMod="0.5")
 	
 	boat4=add_boat(name="Speed boat",
+	level = "4",
 	cost="1000",
 	timeMod="0.25")
 
 	# Baits	
 	bait1=add_bait(name="Worm",
+	level = "1",
 	cost="0",
 	fishMod="1")
 	
 	bait2=add_bait(name="Basic Lure",
+	level = "2",
 	cost="60",
 	fishMod="2")
 
 	bait3=add_bait(name="Advanced Lure",
+	level = "3",
 	cost="300",
 	fishMod="3")
 	
 	bait4=add_bait(name="Bucket O'Bait",
+	level = "4",
 	cost="600",
 	fishMod="4")
 
@@ -72,16 +84,16 @@ def populate():
 	add_game(player2, "lhjb")
 	
   
-def add_rod(name, cost, fishMod):
-    r = Rod.objects.get_or_create(name=name, cost=cost, fishMod=fishMod)[0]
+def add_rod(name, level, cost, fishMod):
+    r = Rod.objects.get_or_create(name=name, level=level, cost=cost, fishMod=fishMod)[0]
     return r
 
-def add_bait(name, cost, fishMod):
-    B = Bait.objects.get_or_create(name=name, cost=cost, fishMod=fishMod)[0]
+def add_bait(name, level, cost, fishMod):
+    B = Bait.objects.get_or_create(name=name, level=level, cost=cost, fishMod=fishMod)[0]
     return B
 
-def add_boat(name, cost, timeMod):
-    b = Boat.objects.get_or_create(name=name, cost=cost, timeMod=timeMod)[0]
+def add_boat(name, level, cost, timeMod):
+    b = Boat.objects.get_or_create(name=name, level=level, cost=cost, timeMod=timeMod)[0]
     return b
 
 def add_game(user, pickledgame):

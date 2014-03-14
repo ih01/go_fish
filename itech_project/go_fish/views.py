@@ -137,59 +137,36 @@ def help(request):
 
 def shop(request):
     context = RequestContext(request)
-    user = request.user.id
-    user_profile = UserProfile.objects.get(user=user)
-    user_balance = user_profile.balance
-    user_rod = user_profile.rod.name
-    user_boat = user_profile.boat.name
-    user_bait = user_profile.bait.name
-    firstRod = Rod.objects.get(pk=1)
-    secondRod = Rod.objects.get(pk=2)
-    thirdRod = Rod.objects.get(pk=3)
-    fourthRod = Rod.objects.get(pk=4)
-    firstBoat = Boat.objects.get(pk=1)
-    secondBoat = Boat.objects.get(pk=2)
-    thirdBoat = Boat.objects.get(pk=3)
-    fourthBoat = Boat.objects.get(pk=4)
-    firstBait = Bait.objects.get(pk=1)
-    secondBait = Bait.objects.get(pk=2)
-    thirdBait = Bait.objects.get(pk=3)
-    fourthBait = Bait.objects.get(pk=4)
-    return render_to_response('shop.html', {'user_balance': user_balance, 'user_rod': user_rod, 'user_boat': user_boat,
-                                     'user_bait': user_bait, 'firstRod': firstRod, 'secondRod': secondRod,
-                                     'thirdRod': thirdRod, 'fourthRod': fourthRod, 'firstBoat': firstBoat,
-                                     'secondBoat': secondBoat, 'thirdBoat': thirdBoat, 'fourthBoat': fourthBoat,
-                                     'firstBait': firstBait, 'secondBait': secondBait, 'thirdBait': thirdBait,
-                                     'fourthBait': fourthBait},context)
+    user_profile = UserProfile.objects.get(user=request.user)
+    rod_list = Rod.objects.filter(level__gt=user_profile.rod.level)
+    boat_list = Boat.objects.filter(level__gt=user_profile.boat.level)
+    bait_list = Bait.objects.filter(level__gt=user_profile.bait.level)
+    context_dict = {'rods': rod_list, 'boats': boat_list, 'bait': bait_list, 'user_profile': user_profile}
+    return render_to_response('shop.html', context_dict, context)
 
 def buy(request, item):
-    context = RequestContext(request)
-    user = request.user.id
-    newItem = item.replace('_', ' ')
-    shop.buyItem(newItem, user)
+    item_level = item[0]
+    item_type = item[1]
+
+    if item_type == 'R':
+        new_item = Rod.objects.get(pk=int(item_level))
+    elif item_type == 'B':
+        new_item = Boat.objects.get(pk=int(item_level))
+    elif item_type == 'b':
+        new_item = Bait.objects.get(pk=int(item_level))
+    else:
+         print "error"
+
+    user = request.user
+    new_shop = Shop()
+    new_shop.buyItem(new_item, user)
     user_profile = UserProfile.objects.get(user=user)
-    user_balance = user_profile.balance
-    user_rod = user_profile.rod.name
-    user_boat = user_profile.boat.name
-    user_bait = user_profile.bait.name
-    firstRod = Rod.objects.get(pk=1)
-    secondRod = Rod.objects.get(pk=2)
-    thirdRod = Rod.objects.get(pk=3)
-    fourthRod = Rod.objects.get(pk=4)
-    firstBoat = Boat.objects.get(pk=1)
-    secondBoat = Boat.objects.get(pk=2)
-    thirdBoat = Boat.objects.get(pk=3)
-    fourthBoat = Boat.objects.get(pk=4)
-    firstBait = Bait.objects.get(pk=1)
-    secondBait = Bait.objects.get(pk=2)
-    thirdBait = Bait.objects.get(pk=3)
-    fourthBait = Bait.objects.get(pk=4)
-    return render_to_response('shop.html', {'user_balance': user_balance, 'user_rod': user_rod, 'user_boat': user_boat,
-                                     'user_bait': user_bait, 'firstRod': firstRod, 'secondRod': secondRod,
-                                     'thirdRod': thirdRod, 'fourthRod': fourthRod, 'firstBoat': firstBoat,
-                                     'secondBoat': secondBoat, 'thirdBoat': thirdBoat, 'fourthBoat': fourthBoat,
-                                     'firstBait': firstBait, 'secondBait': secondBait, 'thirdBait': thirdBait,
-                                     'fourthBait': fourthBait},context)
+    rod_list = Rod.objects.filter(level__gt=user_profile.rod.level)
+    boat_list = Boat.objects.filter(level__gt=user_profile.boat.level)
+    bait_list = Bait.objects.filter(level__gt=user_profile.bait.level)
+    context_dict = {'rods': rod_list, 'boats': boat_list, 'bait': bait_list, 'user_profile': user_profile}
+
+    return render_to_response('shop.html', context_dict)
 
 
 @login_required
