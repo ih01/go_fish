@@ -15,9 +15,7 @@ from django.contrib.auth.models import User
 
 def welcome(request):
 	context = RequestContext(request)
-	us = request.user
-	user_profile = UserProfile.objects.get(user=us)
-	context_dict = {'user_profile':user_profile}
+	context_dict = {}
 	return render_to_response('welcome.html', context_dict, context)
 
 # hopefully won't need seperate page for this
