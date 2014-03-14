@@ -2,9 +2,8 @@
 {% block title %}Register with Go-Fish!{% endblock %}
 {% block body_block %}
 
-	<div class="hero-unit" style="background-color:white !important;">
+	<div class="jumbotron">
 {% load static %}
-
 
         <h1>Register with Go Fish!</h1>
         <br/>
@@ -14,30 +13,45 @@
         <strong>Thank you for registering!</strong>
         <a href="/go_fish/welcome">Return to the homepage.</a><br />
         {% else %}
-        <strong>Register here!</strong><br />
 
-         <form class="form-signin span8" id="user_form" method="post" action="/go_fish/register/"
-              enctype="multipart/form-data">
+
+
+
+         <form class="form-horizontal span8" id="user_form" method="post" action="/go_fish/register/"   enctype="multipart/form-data">
+  <fieldset>
+    <legend>Register Here</legend>
+
             {% csrf_token %}
+       <div class="form-group">
+      <label for="username" class="col-lg-2 control-label">UserName</label>
+      <div class="col-lg-10">
+        <input type="text" class="form-control" id="username" name="username">
 
-            {% for field in user_form.visible_fields %}
-            {{ field.errors }}
-            {{ field.help_text }}<br />
-            {{ field }}<br />
-            {% endfor %}
+      </div>
+    </div>
 
-            {% for field in profile_form.visible_fields %}
-            {{ field.errors }}
-            {{ field.help_text }}<br />
-            {{ field }}<br />
-            {% endfor %}
+       <div class="form-group">
+      <label for="email" class="col-lg-2 control-label">Email</label>
+      <div class="col-lg-10">
+        <input type="text" class="form-control" id="email" name="email">
+          </div>
+           </div>
+
+       <div class="form-group">
+      <label for="password" class="col-lg-2 control-label">Password</label>
+      <div class="col-lg-10">
+        <input type="password" class="form-control" id="password" name="password">
+          </div>
+           </div>
+
 
             <br />
             <!-- Provide a button to click to submit the form. -->
             <input class="btn btn-primary" type="submit" name="submit" value="Register"/>
-
-        </form>
-        {% endif %}
+      </fieldset>
+</form>
+ {% endif %}
     </div>
 </div>
+
 {% endblock %}

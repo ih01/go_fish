@@ -23,19 +23,16 @@ def welcome(request):
 def register(request):
     context = RequestContext(request)
     registered = False       #boolean indicating success of registration
-
     #process
     if request.method == 'POST':
         #try to get info from raw form
         user_form = UserForm(data=request.POST)
         profile_form = UserProfileForm(data=request.POST)
-
         #if valid
         if user_form.is_valid() and profile_form.is_valid():
             user = user_form.save()
             user.set_password(user.password)                 #hash password
             user.save()                                      #update user object
-
             initial_rod = Rod.objects.get(name='Wooden Fishing Rod')
             initial_boat = Boat.objects.get(name='Raft')
             initial_bait = Bait.objects.get(name='Worm')
@@ -43,20 +40,18 @@ def register(request):
             profile.rod = initial_rod
             profile.boat = initial_boat
             profile.bait = initial_bait
-
             profile.user = user
             new_game(user)
             if 'picture' in request.FILES:
                profile.picture = request.FILES['picture']
-
             profile.save()
             registered = True
             #log newly registered user in straight away
             user = authenticate(username=request.POST['username'], password=request.POST['password'])
             login(request, user)
-
         else:
             print user_form.errors, profile_form.errors
+            return HttpResponse("Invalid registration details supplied.")
     else:
         user_form = UserForm()
         profile_form = UserProfileForm()
@@ -65,7 +60,6 @@ def register(request):
         'register.html',
         {'user_form': user_form, 'profile_form': profile_form, 'registered': registered},
         context)
-   # return HttpResponse("Placeholder for register page")
 
 def user_login(request):
     context = RequestContext(request)
@@ -93,7 +87,7 @@ def user_logout(request):
     logout(request)
     return HttpResponseRedirect('/go_fish/welcome/')
 
-
+@login_required
 def play(request):
     context = RequestContext(request)
     us = request.user
@@ -102,6 +96,7 @@ def play(request):
     coords = str(game.get_X())+ "_" + str(game.get_Y())
     return render_to_response('Play.html', {'user_profile':user_prof, 'game':game, 'coords':coords},context)
 
+@login_required
 def fish(request):
     context = RequestContext(request)
     us = request.user
@@ -115,6 +110,7 @@ def fish(request):
     coords = str(game.get_X())+ "_" + str(game.get_Y())
     return render_to_response('Play.html', {'user_profile':user_prof, 'game':game, 'fishCaught':fishCaught, 'coords':coords, 'Game_Over':game_over},context)
 
+@login_required
 def move(request, moveTo):
     context = RequestContext(request)
     us = request.user
@@ -131,10 +127,9 @@ def move(request, moveTo):
 
 def help(request):
     context = RequestContext(request)
-    #context_dict = {}
-
     return render_to_response('help.html', context)
 
+@login_required
 def shop(request):
     context = RequestContext(request)
     user_profile = UserProfile.objects.get(user=request.user)
@@ -144,6 +139,7 @@ def shop(request):
     context_dict = {'rods': rod_list, 'boats': boat_list, 'bait': bait_list, 'user_profile': user_profile}
     return render_to_response('shop.html', context_dict, context)
 
+@login_required
 def buy(request, item):
     context = RequestContext(request)
     item_level = item[0]

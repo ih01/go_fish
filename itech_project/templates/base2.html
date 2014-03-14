@@ -33,12 +33,15 @@
         <div class="container">
           <img src="{% static "top_logo.gif" %}" alt="Picture of logo" />
 
+
+
     </ul>
 
     <ul class="nav navbar-nav navbar-right" >
 
          {% if user.is_authenticated %}
               <a class="navbar-brand" href="/go_fish/profile/">Welcome {{ user.username}}! </a>
+             <li class="active"><a href="/go_fish/welcome/">Home</a></li>
              <li class="active"><a href="/go_fish/play/">Play</a></li>
             <li class="active"><a href="/go_fish/shop/">Shop</a></li>
              <li class="active"><a href="/go_fish/help/">Help</a></li>
@@ -46,6 +49,7 @@
 
         {% else %}
              <a class="navbar-brand" href="">Welcome Stranger! </a>
+             <li class="active"><a href="/go_fish/welcome/">Home</a></li>
              <li class="active"><a href="/go_fish/help/">Help</a></li>
             <li class="active"><a href="/go_fish/login/">Sign In</a></li>
         {% endif %}

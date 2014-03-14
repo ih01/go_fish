@@ -3,24 +3,38 @@
 {% block title %}Login{% endblock %}
 {% block body_block %}
 
-	<div class="hero-unit" style="background-color:white !important;">
+	<div class="jumbotron">
 {% load static %}
 
-
-        <h1>Login to Go Fish!</h1>
+ <div class="container">
+        <h1>Login Here!</h1>
         <br/>
 
-        <form id="login_form" method="post" action="go_fish/login">
+     <form id="login_form" method="post" action="go_fish/login">
+  <fieldset>
+    <legend>Login to Go Fish</legend>
 
             {% csrf_token %}
-            Username:<input type="text" name="username" value="" size="50" />
-            <br/>
-            Password: <input type="password" name="password" value="" size="50" />
-            <br/>
+       <div class="form-group">
+      <label for="username" class="col-lg-2 control-label">User Name</label>
+      <div class="col-lg-10">
+        <input type="text" class="form-control" id="username" name="username">
 
+      </div>
+    </div>
+      <br/><br/><br/>
+       <div class="form-group">
+      <label for="password" class="col-lg-2 control-label">Password</label>
+      <div class="col-lg-10">
+        <input type="password" class="form-control" id="password" name="password">
+          </div>
+           </div>
+            <br /><br/>
+            <!-- Provide a button to click to submit the form. -->
             <input class="btn btn-primary" type="submit" name="submit" value="Sign In"/>
-
-        </form>
+      </fieldset>
+</form>
         </div>
+    </div>
 
 {% endblock %}
