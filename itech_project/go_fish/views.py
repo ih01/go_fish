@@ -133,7 +133,10 @@ def move(request, moveTo):
     return render_to_response('Play.html', {'user_prof':user_prof, 'game':game, 'coords':coords, 'moveTo': moveTo, 'Game_Over':game_over},context)
 
 def help(request):
-    return HttpResponse("Placeholder for help page")
+    context = RequestContext(request)
+    #context_dict = {}
+
+    return render_to_response('help.html', context)
 
 def shop(request):
     context = RequestContext(request)
