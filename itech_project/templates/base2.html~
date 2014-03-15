@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link href="{% static 'css/bootstrap-fluid-adj.css'%} " rel="stylesheet">
+    <link href="{% static 'css/bootswatch.min.css'%} " rel="stylesheet" media="screen">
+    <link href="{% static 'css/bootstrap-responsive.css' %}" rel="stylesheet">
+	<link href="{% static 'css/table.css' %}" rel="stylesheet">
+    <title>Go Fish! {% block title %}{% endblock %}</title>
+
+</head>
+<body>
+
+
+
+
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+
+
+  </div>
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+
+             <div class="navbar-inner">
+        <div class="container">
+          <img src="{% static "top_logo.gif" %}" alt="Picture of logo" />
+
+
+
+    </ul>
+
+    <ul class="nav navbar-nav navbar-right" >
+
+         {% if user.is_authenticated %}
+              <a class="navbar-brand" href="/go_fish/profile/">Welcome {{ user.username}}! </a>
+             <li class="active"><a href="/go_fish/welcome/">Home</a></li>
+             <li class="active"><a href="/go_fish/play/">Play</a></li>
+            <li class="active"><a href="/go_fish/shop/">Shop</a></li>
+             <li class="active"><a href="/go_fish/help/">Help</a></li>
+             <li class="active"><a href="/go_fish/logout/">Sign Out</a></li>
+
+        {% else %}
+             <a class="navbar-brand" href="">Welcome Stranger! </a>
+             <li class="active"><a href="/go_fish/welcome/">Home</a></li>
+             <li class="active"><a href="/go_fish/help/">Help</a></li>
+            <li class="active"><a href="/go_fish/login/">Sign In</a></li>
+        {% endif %}
+
+    </ul>
+  </div>
+</div>
+</div>
+</div>
+
+
+ {% if user.is_authenticated %}
+  <div class="row-fluid">
+        <div class="span3">
+            <div class="well sidebar-nav">
+		<ul class="nav nav-list">
+			<li class="nav-header"></li>
+			<div class="jumbotron">
+    <h2> Your Profile!  <br/><br/>
+    {{ user.username }}<br/><br/>
+    <p>Your Rod: {{ user_profile.rod.name }} </p>
+    <p>Your Boat: {{ user_profile.boat.name }} </p>
+    <p>Your Bait: {{ user_profile.bait.name }} </p>
+    <p>You have {{ user_profile.balance }} gold coins </p>
+    </h2>
+        {% if userprofile.picture %}
+            <img src="{{ userprofile.picture.url }}"  />
+        {% endif %}
+
+</div>
+		</ul>
+
+
+</div>
+</div>
+  {% endif %}
+
+
+<div class="container-fluid">
+    <div class="row-fluid">
+     {% if user.is_authenticated %}
+        <div class="span5">
+            {% else %}
+            <div class="span3">
+                {% endif %}
+            <!--/.well -->
+        </div>
+        <!--/span-->
+        <div class="span5">
+            {% block body_block %}
+            {% endblock %}
+        </div>
+    </div>
+  </div>
+
+
+<hr>
+
+
+<footer>
+    <div class="container-fluid">
+        <p>&copy; Go Fish Acknowledgements</p>
+    </div>
+</footer>
+
+
+<hr/>
+
+
+<script src="{% static 'js/jquery-2.0.3.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+</body>
+</html>
+
+

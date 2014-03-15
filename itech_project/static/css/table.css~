@@ -7,10 +7,6 @@ table,tr,td {
     border-collapse:collapse
 } 
 
-td {
-    background-color:#2fa4e7;
-} 
-
 td:hover {
     background-color: #33AEF5;
 }

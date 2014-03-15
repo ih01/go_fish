@@ -97,33 +97,32 @@ def play(request):
     return render_to_response('Play.html', {'user_profile':user_prof, 'game':game, 'coords':coords},context)
 
 @login_required
-def fish(request):
-    context = RequestContext(request)
-    us = request.user
-    user_prof = UserProfile.objects.get(user=us)
-    game = load_game(us)
-    baitMod = get_baitMod(us)
-    rodMod = get_rodMod(us)
-    fishCaught = game.fish(rodMod, baitMod)
-    save_game(us, game)
-    game_over = check_end_game(us, game)
-    coords = str(game.get_X())+ "_" + str(game.get_Y())
-    return render_to_response('Play.html', {'user_profile':user_prof, 'game':game, 'fishCaught':fishCaught, 'coords':coords, 'Game_Over':game_over},context)
-
-@login_required
 def move(request, moveTo):
     context = RequestContext(request)
+    context_dict = {}
+    context_dict ['moveTo'] = moveTo
     us = request.user
     user_prof = UserProfile.objects.get(user=us)
+    context_dict ['user_profile']=user_prof
     game = load_game(us)
+    context_dict ['game']=game
     moveX= int(moveTo[0])
     moveY= int(moveTo[2])
-    boatMod = get_boatMod(us)
-    game.move(moveX, moveY, boatMod)
+    if moveX == game.posX and moveY == game.posY:
+    	baitMod = get_baitMod(us)
+    	rodMod = get_rodMod(us)
+    	fishCaught = game.fish(rodMod, baitMod)
+	context_dict ['fishCaught']=fishCaught
+    else:
+    	boatMod = get_boatMod(us)
+   	game.move(moveX, moveY, boatMod)
     save_game(us, game)
+    context_dict ['game']=game
     game_over = check_end_game(us, game)
+    context_dict ['Game_Over']=game_over
     coords = str(game.get_X())+ "_" + str(game.get_Y())
-    return render_to_response('Play.html', {'user_profile':user_prof, 'game':game, 'coords':coords, 'moveTo': moveTo, 'Game_Over':game_over},context)
+    context_dict ['coords']=coords
+    return render_to_response('Play.html', context_dict, context)
 
 def help(request):
     context = RequestContext(request)
@@ -144,7 +143,7 @@ def buy(request, item):
     context = RequestContext(request)
     item_level = item[0]
     item_type = item[1]
-
+    
     if item_type == 'R':
         new_item = Rod.objects.get(pk=int(item_level))
     elif item_type == 'B':
