@@ -70,6 +70,7 @@
 			<div class="jumbotron">
     <h2> Your Profile!  <br/><br/>
     {{ user.username }}<br/><br/>
+    {% if game %}
     <p>Your Rod: {{ user_profile.rod.name }} </p>
     <p>Your Boat: {{ user_profile.boat.name }} </p>
     <p>Your Bait: {{ user_profile.bait.name }} </p>
@@ -78,6 +79,7 @@
         {% if userprofile.picture %}
             <img src="{{ userprofile.picture.url }}"  />
         {% endif %}
+	{% endif %}
 
 </div>
 		</ul>

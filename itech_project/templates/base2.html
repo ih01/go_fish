@@ -62,6 +62,7 @@
 
 
  {% if user.is_authenticated %}
+ {% if user_profile %}
   <div class="row-fluid">
         <div class="span3">
             <div class="well sidebar-nav">
@@ -86,6 +87,7 @@
 </div>
 </div>
   {% endif %}
+{% endif %}
 
 
 <div class="container-fluid">

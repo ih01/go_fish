@@ -19,7 +19,7 @@ class Shop(object):
 
         update = UserProfile.objects.get(user=user)
 
-        if not ( update.balance >= item.cost ):  # user has insufficient means
+        if not ( update.balance > item.cost ):  # user has insufficient means
             return
 
         else:  # calculate new balance

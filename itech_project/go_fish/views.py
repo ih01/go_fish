@@ -31,6 +31,7 @@ def welcome(request):
 
 def register(request):
     context = RequestContext(request)
+    profile = None
     registered = False  #boolean indicating success of registration
     #process
     if request.method == 'POST':
@@ -67,19 +68,19 @@ def register(request):
 
     return render_to_response(
         'register.html',
-        {'user_form': user_form, 'profile_form': profile_form, 'registered': registered},
+        {'user_form': user_form, 'user_profile': profile, 'profile_form': profile_form, 'registered': registered},
         context)
 
 
 def user_login(request):
     context = RequestContext(request)
+    user_prof=None
 
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
 
         user = authenticate(username=username, password=password)
-
         if user is not None:
             if user.is_active:
                 login(request, user)
@@ -115,10 +116,7 @@ def move(request, moveTo):
     context_dict = {}
     context_dict['moveTo'] = moveTo
     us = request.user
-    user_prof = get_userProfile(us)
-    context_dict['user_profile'] = user_prof
     game = load_game(us)
-    context_dict['game'] = game
     moveX = int(moveTo[0])
     moveY = int(moveTo[2])
     if moveX == game.get_X() and moveY == game.get_Y():
@@ -137,11 +135,6 @@ def move(request, moveTo):
     user_prof = get_userProfile(us)
     context_dict ['user_profile']=user_prof
     context_dict ['coords']=coords
-    context_dict['game'] = game
-    game_over = check_end_game(us, game)
-    context_dict['Game_Over'] = game_over
-    coords = str(game.get_X()) + "_" + str(game.get_Y())
-    context_dict['coords'] = coords
     return render_to_response('Play.html', context_dict, context)
 
 
@@ -150,9 +143,9 @@ def help(request):
     user_prof = None
     try:
 	us = request.user
-        user_prof = get_userprofile(us)
+	user_prof = get_userProfile(us)
     except:
-        user_prof = None
+	user_prof = None
     context_dict = {}
     context_dict ['user_profile']=user_prof
     return render_to_response('help.html', context_dict, context)
@@ -214,7 +207,7 @@ def profile(request):
 		up = None
 
 	context_dict['user'] = u
-	context_dict['userprofile'] = up
+	context_dict['user_profile'] = up
 	return render_to_response('profile.html', context_dict, context)
 
 
