@@ -7,6 +7,7 @@ class Rod(models.Model):
     type = models.CharField(max_length=20, default='Rod')
     cost = models.IntegerField(max_length=5)
     fishMod = models.DecimalField(max_digits=5,decimal_places=2)
+    modDescriptor = models.CharField(max_length=5)
     def __unicode__(self):
         return unicode(self.name) + " Cost: " + unicode(self.cost) + " Fish Modifier: " + unicode(self.fishMod)
 
@@ -16,6 +17,7 @@ class Boat(models.Model):
     type = models.CharField(max_length=20, default='Boat')
     cost = models.IntegerField(max_length=5)
     timeMod = models.DecimalField(max_digits=5,decimal_places=2)
+    modDescriptor = models.CharField(max_length=5)
     def __unicode__(self):
         return unicode(self.name) + " Cost: " + unicode(self.cost) + " Time Modifier: " + unicode(self.timeMod)
 
@@ -25,6 +27,7 @@ class Bait(models.Model):
     type = models.CharField(max_length=20, default='Bait')
     cost = models.IntegerField(max_length=5)
     fishMod = models.DecimalField(max_digits=5,decimal_places=2)
+    modDescriptor = models.CharField(max_length=5)
     def __unicode__(self):
         return unicode(self.name) + " Cost: " + unicode(self.cost) + " Fish Modifier: " + unicode(self.fishMod)
 
