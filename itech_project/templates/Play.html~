@@ -35,7 +35,7 @@
 	{% for j in "01234" %}	
 	{% with js=j|stringformat:"s" %}
 	{% with ""|add:is|add:"_"|add:js as joined %}
-        {% ifequal coords  joined %}<td bgcolor="#2fa4e7" height="70px" width="70px" ><a href="/go_fish/move/{{ joined }}"><img src="{% static "smallboat.gif" %}" alt="Picture of boat" id="boat"/></a></td> {% else %} <td bgcolor="#2fa4e7" height="70px" width="70px"><a href="/go_fish/move/{{ joined }}"></a></td> {% endifequal %}
+        {% ifequal coords  joined %}<td height="70px" width="70px" ><a href="/go_fish/move/{{ joined }}"><img src="{% static "smallboat.gif" %}" alt="Picture of boat" id="boat"/></a></td> {% else %} <td height="70px" width="70px"><a href="/go_fish/move/{{ joined }}"></a></td> {% endifequal %}
 	{% endwith %}
 	{% endwith %}
     {% endfor %}
@@ -47,7 +47,10 @@
 <br/>
 
 <h2>Time Left: {{ game.time_left}}
+{% if fishCaught %}
 <br/>
+You just caught {{ fishCaught }} fish.
+{% endif %}
 <br/>
 You have caught {{ game.fishTotal }} fish today.
 </h2>

@@ -47,7 +47,10 @@
 <br/>
 
 <h2>Time Left: {{ game.time_left}}
+{% if fishCaught %}
 <br/>
+You just caught {{ fishCaught }} fish!
+{% endif %}
 <br/>
 You have caught {{ game.fishTotal }} fish today.
 </h2>
