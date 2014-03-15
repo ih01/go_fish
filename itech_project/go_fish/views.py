@@ -14,9 +14,16 @@ from django.contrib.auth.models import User
 
 
 def welcome(request):
-    context = RequestContext(request)
-    context_dict = {}
-    return render_to_response('welcome.html', context_dict, context)
+	context = RequestContext(request)
+        user_prof = None
+        try:
+    		us = request.user
+    	        user_prof = UserProfile.objects.get(user=us)
+	except:
+        	user_prof = None
+	context_dict = {}
+	context_dict ['user_profile']=user_prof
+	return render_to_response('welcome.html', context_dict, context)
 
 
 # hopefully won't need seperate page for this
@@ -122,6 +129,13 @@ def move(request, moveTo):
         boatMod = get_boatMod(us)
         game.move(moveX, moveY, boatMod)
     save_game(us, game)
+    game_over = check_end_game(us, game)
+    context_dict ['game']=game
+    context_dict ['Game_Over']=game_over
+    coords = str(game.get_X())+ "_" + str(game.get_Y())
+    user_prof = UserProfile.objects.get(user=us)
+    context_dict ['user_profile']=user_prof
+    context_dict ['coords']=coords
     context_dict['game'] = game
     game_over = check_end_game(us, game)
     context_dict['Game_Over'] = game_over
@@ -132,7 +146,15 @@ def move(request, moveTo):
 
 def help(request):
     context = RequestContext(request)
-    return render_to_response('help.html', context)
+    user_prof = None
+    try:
+	us = request.user
+        user_prof = UserProfile.objects.get(user=us)
+    except:
+        user_prof = None
+    context_dict = {}
+    context_dict ['user_profile']=user_prof
+    return render_to_response('help.html', context_dict, context)
 
 
 @login_required
