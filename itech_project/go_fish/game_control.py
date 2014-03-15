@@ -10,9 +10,16 @@ from django.core.management import setup_environ
 setup_environ(settings)
 from models import Game, UserProfile, Rod, Boat, Bait
 from game import MakeGame
+from user_item_control import *
 #imported as pickle just in case someone
 #wants to revert to regular pickle later
 import cPickle as pickle
+
+
+#find users game
+def find_game(user):
+	return Game.objects.get(user=user)
+
 
 #create a new game for the user
 #and store it in the DB
@@ -36,7 +43,7 @@ def new_game(user):
 def load_game(user):
 	
 	#get the users game
-	users_game = Game.objects.get(user=user)
+	users_game = find_game(user)
 
 	#unpickle it back to an object and return it
 	game = pickle.loads(str(users_game.pickledgame))
@@ -51,7 +58,7 @@ def save_game(user, game):
 	saveGame = pickle.dumps(game)
 	
 	#find the correct model object in the DB
-	users_game = Game.objects.get(user=user)
+	users_game = find_game(user)
 
 	#update it with new game state and save to DB
 	users_game.pickledgame = saveGame
@@ -62,7 +69,7 @@ def save_game(user, game):
 def reset_game(user):
 	
 	#find the users current game
-	currentGame = Game.objects.get(user=user)
+	currentGame = find_game(user)
 
 	#Make a new game and pickle it
 	new_game = MakeGame()
@@ -75,7 +82,7 @@ def reset_game(user):
 #Adds fish to money
 def fishToMoney(user, game):
 	#get user profile info
-	user_prof = UserProfile.objects.get(user=user)
+	user_prof = get_userProfile(user)
 	#changes fish into money
 	user_prof.balance += game.sell_fish()
 	#save changes
@@ -96,33 +103,6 @@ def check_end_game(user, game):
 		return True
 	else:
 		return False
-
-		
-
-#gets the modifier for the users boat
-def get_boatMod(user):
-	
-	#get user profile info
-	user_prof = UserProfile.objects.get(user=user)
-	#return the modifier
-	return user_prof.boat.timeMod
-
-#gets modifier for users rod
-def get_rodMod(user):
-
-	#get user profile info
-	user_prof = UserProfile.objects.get(user=user)
-	#return the modifier
-	return user_prof.rod.fishMod
-
-
-#gets modifier for users bait
-def get_baitMod(user):
-
-	#get user profile info
-	user_prof = UserProfile.objects.get(user=user)
-	#return the modifier
-	return user_prof.bait.fishMod
 
 
 	

@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from game_control import *
 from game import MakeGame
+from user_item_control import *
 from models import Rod, Boat, Bait, Game, UserProfile
 from shop import Shop
 from django.contrib.auth.models import User
@@ -15,12 +16,12 @@ from django.contrib.auth.models import User
 
 def welcome(request):
 	context = RequestContext(request)
-        user_prof = None
-        try:
-    		us = request.user
-    	        user_prof = UserProfile.objects.get(user=us)
+	user_prof = None
+	try:
+		us = request.user
+		user_prof = get_userProfile(us)
 	except:
-        	user_prof = None
+		user_prof = None
 	context_dict = {}
 	context_dict ['user_profile']=user_prof
 	return render_to_response('welcome.html', context_dict, context)
@@ -41,9 +42,9 @@ def register(request):
             user = user_form.save()
             user.set_password(user.password)  #hash password
             user.save()  #update user object
-            initial_rod = Rod.objects.get(name='Wooden Fishing Rod')
-            initial_boat = Boat.objects.get(name='Raft')
-            initial_bait = Bait.objects.get(name='Worm')
+            initial_rod = Rod.objects.get(level= 1)
+            initial_boat = Boat.objects.get(level= 1)
+            initial_bait = Bait.objects.get(level= 1)
             profile = profile_form.save(commit=False)  #userprofile instance
             profile.rod = initial_rod
             profile.boat = initial_boat
@@ -102,7 +103,7 @@ def user_logout(request):
 def play(request):
     context = RequestContext(request)
     us = request.user
-    user_prof = UserProfile.objects.get(user=us)
+    user_prof = get_userProfile(us)
     game = load_game(us)
     coords = str(game.get_X()) + "_" + str(game.get_Y())
     return render_to_response('Play.html', {'user_profile': user_prof, 'game': game, 'coords': coords}, context)
@@ -114,13 +115,13 @@ def move(request, moveTo):
     context_dict = {}
     context_dict['moveTo'] = moveTo
     us = request.user
-    user_prof = UserProfile.objects.get(user=us)
+    user_prof = get_userProfile(us)
     context_dict['user_profile'] = user_prof
     game = load_game(us)
     context_dict['game'] = game
     moveX = int(moveTo[0])
     moveY = int(moveTo[2])
-    if moveX == game.posX and moveY == game.posY:
+    if moveX == game.get_X() and moveY == game.get_Y():
         baitMod = get_baitMod(us)
         rodMod = get_rodMod(us)
         fishCaught = game.fish(rodMod, baitMod)
@@ -133,7 +134,7 @@ def move(request, moveTo):
     context_dict ['game']=game
     context_dict ['Game_Over']=game_over
     coords = str(game.get_X())+ "_" + str(game.get_Y())
-    user_prof = UserProfile.objects.get(user=us)
+    user_prof = get_userProfile(us)
     context_dict ['user_profile']=user_prof
     context_dict ['coords']=coords
     context_dict['game'] = game
@@ -149,7 +150,7 @@ def help(request):
     user_prof = None
     try:
 	us = request.user
-        user_prof = UserProfile.objects.get(user=us)
+        user_prof = get_userprofile(us)
     except:
         user_prof = None
     context_dict = {}
@@ -159,13 +160,17 @@ def help(request):
 
 @login_required
 def shop(request):
-    context = RequestContext(request)
-    user_profile = UserProfile.objects.get(user=request.user)
-    rod_list = Rod.objects.filter(level__gt=user_profile.rod.level)
-    boat_list = Boat.objects.filter(level__gt=user_profile.boat.level)
-    bait_list = Bait.objects.filter(level__gt=user_profile.bait.level)
-    context_dict = {'rods': rod_list, 'boats': boat_list, 'bait': bait_list, 'user_profile': user_profile}
-    return render_to_response('shop.html', context_dict, context)
+	context = RequestContext(request)
+	us=request.user
+	game = load_game(us)
+	fishToMoney(us, game)
+	save_game(us, game)
+	user_profile = get_userProfile(us)
+	rod_list = get_rodList(us)
+	boat_list = get_boatList(us)
+	bait_list = get_baitList(us)
+	context_dict = {'rods': rod_list, 'boats': boat_list, 'bait': bait_list, 'user_profile': user_profile}
+	return render_to_response('shop.html', context_dict, context)
 
 
 @login_required
@@ -175,21 +180,21 @@ def buy(request, item):
     item_type = item[1]
 
     if item_type == 'R':
-        new_item = Rod.objects.get(pk=int(item_level))
+        new_item = getRod(item_level)
     elif item_type == 'B':
-        new_item = Boat.objects.get(pk=int(item_level))
+        new_item = getBoat(item_level)
     elif item_type == 'b':
-        new_item = Bait.objects.get(pk=int(item_level))
+        new_item = getBait(item_level)
     else:
         print "error"
 
     user = request.user
     new_shop = Shop()
     new_shop.buyItem(new_item, user)
-    user_profile = UserProfile.objects.get(user=user)
-    rod_list = Rod.objects.filter(level__gt=user_profile.rod.level)
-    boat_list = Boat.objects.filter(level__gt=user_profile.boat.level)
-    bait_list = Bait.objects.filter(level__gt=user_profile.bait.level)
+    user_profile = get_userProfile(user)
+    rod_list = get_rodList(user)
+    boat_list = get_boatList(user)
+    bait_list = get_baitList(user)
     context_dict = {'rods': rod_list, 'boats': boat_list, 'bait': bait_list, 'user_profile': user_profile}
 
     return render_to_response('shop.html', context_dict, context)
@@ -197,18 +202,20 @@ def buy(request, item):
 
 @login_required
 def profile(request):
-    context = RequestContext(request)
-    context_dict = {}
-    u = User.objects.get(username=request.user)
+	context = RequestContext(request)
+	context_dict = {}
+	#u = User.objects.get(username=request.user)
+	u = request.user
 
-    try:
-        up = UserProfile.objects.get(user=u)
-    except:
-        up = None
+	try:
+        #up = UserProfile.objects.get(user=u)
+		up = get_userProfile(u)
+	except:
+		up = None
 
-    context_dict['user'] = u
-    context_dict['userprofile'] = up
-    return render_to_response('profile.html', context_dict, context)
+	context_dict['user'] = u
+	context_dict['userprofile'] = up
+	return render_to_response('profile.html', context_dict, context)
 
 
 @login_required
