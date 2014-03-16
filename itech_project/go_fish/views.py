@@ -84,7 +84,7 @@ def user_login(request):
         if user is not None:
             if user.is_active:
                 login(request, user)
-                return HttpResponseRedirect('/go_fish/welcome/')
+                return HttpResponseRedirect("/")
             else:
                 return HttpResponse("Your Go Fish account has been disabled.")
         else:
@@ -97,7 +97,7 @@ def user_login(request):
 @login_required
 def user_logout(request):
     logout(request)
-    return HttpResponseRedirect('/go_fish/welcome/')
+    return HttpResponseRedirect("/")
 
 
 @login_required

@@ -16,23 +16,23 @@
 {% else %}
 
 <div class="hero-unit" style="background-color:white !important;">
-	
+
 	<center>
 <br/>
          <div class="jumbotron">
    {% load static %}
 
-       <h1>Fish Here!</h1>
+       <h2>Fish Here!</h2>
 
-      
+
 <br/>
 <br/>
 
 <table border="0.1" color="white">
-{% for i in "01234" %}	
+{% for i in "01234" %}
 	{% with is=i|stringformat:"s" %}
     <tr>
-	{% for j in "01234" %}	
+	{% for j in "01234" %}
 	{% with js=j|stringformat:"s" %}
 	{% with ""|add:is|add:"_"|add:js as joined %}
         {% ifequal coords  joined %}<td height="70px" width="70px" ><a href="/go_fish/move/{{ joined }}"><img src="{% static "smallboat.gif" %}" alt="Picture of boat" id="boat"/></a></td> {% else %} <td height="70px" width="70px"><a href="/go_fish/move/{{ joined }}"></a></td> {% endifequal %}
@@ -42,7 +42,7 @@
 	{% endwith %}
 	</tr>
 {% endfor %}
-</table> 
+</table>
 
 <br/>
 
