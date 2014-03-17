@@ -11,7 +11,7 @@ def get_userProfile(user):
 	return UserProfile.objects.get(user=user)
 	
 #check for user profile
-def check_user():
+def check_user(request):
 	user_prof = None
 	try:
 		us = request.user
