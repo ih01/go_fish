@@ -71,11 +71,13 @@
 			<div class="jumbotron">
     <h3> Your Profile!  <br/><br/>
     {{ user.username }}<br/><br/>
+    </h3>
+    <h4>
     <p>Your Rod: <br/>{{ user_profile.rod.name }} </p>
     <p>Your Boat: <br/>{{ user_profile.boat.name }} </p>
     <p>Your Bait: <br/>{{ user_profile.bait.name }} </p>
     <p>You have {{ user_profile.balance }} gold coins </p>
-    </h3>
+    </h4>
         {% if userprofile.picture %}
             <img src="{{ userprofile.picture.url }}"  />
         {% endif %}
