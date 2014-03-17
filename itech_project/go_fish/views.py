@@ -15,13 +15,13 @@ from django.contrib.auth.models import User
 
 def welcome(request):
 	context = RequestContext(request)
-	context_dict = check_user()
+	context_dict = check_user(request)
 	return render_to_response('welcome.html', context_dict, context)
 	
 	
 def help(request):
     context = RequestContext(request)
-    context_dict = check_user()
+    context_dict = check_user(request)
     return render_to_response('help.html', context_dict, context)
 
 
