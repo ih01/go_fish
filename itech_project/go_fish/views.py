@@ -42,9 +42,9 @@ def register(request):
             user = user_form.save()
             user.set_password(user.password)  #hash password
             user.save()  #update user object
-            initial_rod = Rod.objects.get(level= 1)
-            initial_boat = Boat.objects.get(level= 1)
-            initial_bait = Bait.objects.get(level= 1)
+            initial_rod = getRod(1)
+            initial_boat = getBoat(1)
+            initial_bait = getBait(1)
             profile = profile_form.save(commit=False)  #userprofile instance
             profile.rod = initial_rod
             profile.boat = initial_boat
