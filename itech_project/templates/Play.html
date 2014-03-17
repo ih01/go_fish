@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+  <!DOCTYPE html>
 {% extends 'base2.html' %}
 {% block title %}{% endblock %}
 {% block body_block %}
@@ -45,6 +45,19 @@
 </table>
 
 <br/>
+</center>
+	</div>
+
+</div>
+
+
+     <div class="row-fluid">
+        <div class="span3">
+        <center>
+            <div class="well pull-right   sidebar-nav">
+		<ul class="nav nav-list">
+			<li class="nav-header"></li>
+			<div class="jumbotron">
 
 <h3>Time Left: {{ game.time_left}}
 {% if moveTo %}
@@ -56,11 +69,19 @@ You have {{ game.fishTotal }} fish in your stock
 </h3>
 <br/>
 <br/>
-
-
-	</center>
-	</div>
 </div>
+		</ul>
+
+</div>
+        </center>
+</div>
+</div>
+
+
+
+
+
+
 
 {% endif %}
 {% endblock %}
