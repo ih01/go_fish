@@ -42,9 +42,9 @@ def register(request):
             user = user_form.save()
             user.set_password(user.password)  #hash password
             user.save()  #update user object
-            initial_rod = Rod.objects.get(level= 1)
-            initial_boat = Boat.objects.get(level= 1)
-            initial_bait = Bait.objects.get(level= 1)
+            initial_rod = getRod(1)
+            initial_boat = getBoat(1)
+            initial_bait = getBait(1)
             profile = profile_form.save(commit=False)  #userprofile instance
             profile.rod = initial_rod
             profile.boat = initial_boat
@@ -122,18 +122,19 @@ def move(request, moveTo):
         baitMod = get_baitMod(us)
         rodMod = get_rodMod(us)
         fishCaught = game.fish(rodMod, baitMod)
-        context_dict['fishCaught'] = fishCaught
     else:
         boatMod = get_boatMod(us)
         game.move(moveX, moveY, boatMod)
+        fishCaught = 0
+    context_dict['fishCaught'] = fishCaught
     save_game(us, game)
     game_over = check_end_game(us, game)
-    context_dict ['game']=game
-    context_dict ['Game_Over']=game_over
-    coords = str(game.get_X())+ "_" + str(game.get_Y())
+    context_dict['game'] = game
+    context_dict['Game_Over'] = game_over
+    coords = str(game.get_X()) + "_" + str(game.get_Y())
     user_prof = get_userProfile(us)
-    context_dict ['user_profile']=user_prof
-    context_dict ['coords']=coords
+    context_dict['user_profile'] = user_prof
+    context_dict['coords'] = coords
     return render_to_response('Play.html', context_dict, context)
 
 
