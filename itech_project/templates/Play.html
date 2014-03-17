@@ -3,30 +3,33 @@
 {% block title %}{% endblock %}
 {% block body_block %}
 {% if Game_Over %}
-
-<div class="hero-unit" style="background-color:white !important;">
-	<center>
+<center>
+<div class="hero-unit" style="background-color:white !important; ">
+	
 <br/>
          <div class="jumbotron">
    {% load static %}
 
        <h1>Day Over!</h1>
+	
 	   </div>
 </div>
+</center>
 {% else %}
 
 <div class="hero-unit" style="background-color:white !important;">
 
-	<center>
-<br/>
+	
          <div class="jumbotron">
+	<h3 style="float:right;">Time Left: {{ game.time_left}} 
+{% if moveTo %}
+<br/>
+You just caught {{ fishCaught }} fish
+{% endif %}
+<br/>
+You have {{ game.fishTotal }} fish in your stock
+</h3>
    {% load static %}
-
-       <h2>Fish Here!</h2>
-
-
-<br/>
-<br/>
 
 <table border="0.1" color="white">
 {% for i in "01234" %}
@@ -35,7 +38,7 @@
 	{% for j in "01234" %}
 	{% with js=j|stringformat:"s" %}
 	{% with ""|add:is|add:"_"|add:js as joined %}
-        {% ifequal coords  joined %}<td height="70px" width="70px" ><a href="/go_fish/move/{{ joined }}"><img src="{% static "smallboat.gif" %}" alt="Picture of boat" id="boat"/></a></td> {% else %} <td height="70px" width="70px"><a href="/go_fish/move/{{ joined }}"></a></td> {% endifequal %}
+        {% ifequal coords  joined %}<td height="50px" width="50px" ><a href="/go_fish/move/{{ joined }}"><img src="{% static "smallboat.gif" %}" alt="Picture of boat" id="boat"/></a></td> {% else %} <td height="50px" width="50px"><a href="/go_fish/move/{{ joined }}"></a></td> {% endifequal %}
 	{% endwith %}
 	{% endwith %}
     {% endfor %}
@@ -49,38 +52,6 @@
 	</div>
 
 </div>
-
-
-     <div class="row-fluid">
-        <div class="span3">
-        <center>
-            <div class="well pull-right   sidebar-nav">
-		<ul class="nav nav-list">
-			<li class="nav-header"></li>
-			<div class="jumbotron">
-
-<h3>Time Left: {{ game.time_left}}
-{% if moveTo %}
-<br/>
-You just caught {{ fishCaught }} fish
-{% endif %}
-<br/>
-You have {{ game.fishTotal }} fish in your stock
-</h3>
-<br/>
-<br/>
-</div>
-		</ul>
-
-</div>
-        </center>
-</div>
-</div>
-
-
-
-
-
 
 
 {% endif %}

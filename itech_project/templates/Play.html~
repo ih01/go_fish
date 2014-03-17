@@ -1,66 +1,58 @@
- <!DOCTYPE html>
+  <!DOCTYPE html>
 {% extends 'base2.html' %}
 {% block title %}{% endblock %}
 {% block body_block %}
 {% if Game_Over %}
-
-<div class="hero-unit" style="background-color:white !important;">
-	<center>
+<center>
+<div class="hero-unit" style="background-color:white !important; ">
+	
 <br/>
          <div class="jumbotron">
    {% load static %}
 
        <h1>Day Over!</h1>
+	
 	   </div>
 </div>
+</center>
 {% else %}
 
 <div class="hero-unit" style="background-color:white !important;">
+
 	
-	<center>
-<br/>
          <div class="jumbotron">
+	<h3 style="float:right;">Time Left: {{ game.time_left}} <form><input class="btn btn-success" type="button" value="How to Play" onClick="window.location.href='help'" style="width:250px !important;"></form>
+{% if moveTo %}
+<br/>
+You just caught {{ fishCaught }} fish
+{% endif %}
+<br/>
+You have {{ game.fishTotal }} fish in your stock
+</h3>
    {% load static %}
 
-       <h1>Fish Here!</h1>
-
-      
-<br/>
-<br/>
-
 <table border="0.1" color="white">
-{% for i in "01234" %}	
+{% for i in "01234" %}
 	{% with is=i|stringformat:"s" %}
     <tr>
-	{% for j in "01234" %}	
+	{% for j in "01234" %}
 	{% with js=j|stringformat:"s" %}
 	{% with ""|add:is|add:"_"|add:js as joined %}
-        {% ifequal coords  joined %}<td height="70px" width="70px" ><a href="/go_fish/move/{{ joined }}"><img src="{% static "smallboat.gif" %}" alt="Picture of boat" id="boat"/></a></td> {% else %} <td height="70px" width="70px"><a href="/go_fish/move/{{ joined }}"></a></td> {% endifequal %}
+        {% ifequal coords  joined %}<td height="50px" width="50px" ><a href="/go_fish/move/{{ joined }}"><img src="{% static "smallboat.gif" %}" alt="Picture of boat" id="boat"/></a></td> {% else %} <td height="50px" width="50px"><a href="/go_fish/move/{{ joined }}"></a></td> {% endifequal %}
 	{% endwith %}
 	{% endwith %}
     {% endfor %}
 	{% endwith %}
 	</tr>
 {% endfor %}
-</table> 
+</table>
 
 <br/>
-
-<h2>Time Left: {{ game.time_left}}
-{% if fishCaught %}
-<br/>
-You just caught {{ fishCaught }} fish!
-{% endif %}
-<br/>
-You have caught {{ game.fishTotal }} fish today.
-</h2>
-<br/>
-<br/>
-
-
-	</center>
+</center>
 	</div>
+
 </div>
+
 
 {% endif %}
 {% endblock %}

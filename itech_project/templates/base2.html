@@ -8,7 +8,7 @@
     <link href="{% static 'css/bootstrap-fluid-adj.css'%} " rel="stylesheet">
     <link href="{% static 'css/bootswatch.min.css'%} " rel="stylesheet" media="screen">
     <link href="{% static 'css/bootstrap-responsive.css' %}" rel="stylesheet">
-	<link href="{% static 'css/table.css' %}" rel="stylesheet">
+<link href="{% static 'css/table.css' %}" rel="stylesheet">
     <title>Go Fish! {% block title %}{% endblock %}</title>
 
 </head>
@@ -59,37 +59,29 @@
 </div>
 </div>
 </div>
-
-
- {% if user.is_authenticated %}
+<div class="jumbotron">
+         {% if user.is_authenticated %}
  {% if user_profile %}
-  <div class="row-fluid">
-        <div class="span3">
-            <div class="well sidebar-nav">
-		<ul class="nav nav-list">
-			<li class="nav-header"></li>
-			<div class="jumbotron">
-    <h3> Your Profile!  <br/><br/>
-    {{ user.username }}<br/><br/>
-    </h3>
-    <h4>
-    <p>Your Rod: <br/>{{ user_profile.rod.name }} </p>
-    <p>Your Boat: <br/>{{ user_profile.boat.name }} </p>
-    <p>Your Bait: <br/>{{ user_profile.bait.name }} </p>
-    <p>You have {{ user_profile.balance }} gold coins </p>
+        <center>
+<h4>
+Your Rod: {{ user_profile.rod.name }} - Your Boat: {{ user_profile.boat.name }} - Your Bait: {{ user_profile.bait.name }} 
+You have {{ user_profile.balance }} gold coins 
     </h4>
         {% if userprofile.picture %}
-            <img src="{{ userprofile.picture.url }}"  />
+            <img src="{{ userprofile.picture.url }}" />
         {% endif %}
-
+</center>
 </div>
-		</ul>
+</ul>
 
 </div>
 
 </div>
   {% endif %}
 {% endif %}
+
+
+
 
 
 <div class="container-fluid">
@@ -102,9 +94,11 @@
             <!--/.well -->
         </div>
         <!--/span-->
-        <div class="span5">
+        <div class="span8">
+         
             {% block body_block %}
             {% endblock %}
+	  
         </div>
     </div>
   </div>
@@ -130,8 +124,6 @@
 
 <script src="{% static 'js/jquery-2.0.3.min.js' %}"></script>
 <script src="{% static 'js/bootstrap.min.js' %}"></script>
-
+<script src="{% static 'js/bootswatch.js' %}"></script>
 </body>
 </html>
-
-
