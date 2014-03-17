@@ -5,7 +5,7 @@
 	<div class="jumbotron">
 {% load static %}
 
-        <h1>Register with Go Fish!</h1>
+        <h2>Register with Go Fish!</h2>
         <br/>
 
      <div class="container">
@@ -17,10 +17,11 @@
 
 
 
-         <form class="form-horizontal span8" id="user_form" method="post" action="/go_fish/register/"   enctype="multipart/form-data">
+         <form id="user_form" method="post" action="/go_fish/register/"   enctype="multipart/form-data">
   <fieldset>
     <legend>Register Here</legend>
 
+      <!--user input fields_-->
             {% csrf_token %}
        <div class="form-group">
       <label for="username" class="col-lg-2 control-label">UserName</label>
@@ -29,22 +30,13 @@
 
       </div>
     </div>
-
-       <div class="form-group">
-      <label for="email" class="col-lg-2 control-label">Email</label>
-      <div class="col-lg-10">
-        <input type="text" class="form-control" id="email" name="email">
-          </div>
-           </div>
-
+<br/><br/><br/>
        <div class="form-group">
       <label for="password" class="col-lg-2 control-label">Password</label>
       <div class="col-lg-10">
         <input type="password" class="form-control" id="password" name="password">
           </div>
            </div>
-
-
             <br />
             <!-- Provide a button to click to submit the form. -->
             <input class="btn btn-primary" type="submit" name="submit" value="Register"/>

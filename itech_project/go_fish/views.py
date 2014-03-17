@@ -51,8 +51,8 @@ def register(request):
             profile.bait = initial_bait
             profile.user = user
             new_game(user)
-            if 'picture' in request.FILES:
-                profile.picture = request.FILES['picture']
+          #  if 'picture' in request.FILES:
+               #profile.picture = request.FILES['picture']
             profile.save()
             registered = True
             #log newly registered user in straight away
@@ -60,7 +60,7 @@ def register(request):
             login(request, user)
         else:
             print user_form.errors, profile_form.errors
-            return HttpResponse("Invalid registration details supplied.")
+            return HttpResponse("Invalid registration details supplied.Please go back and try again.")
     else:
         user_form = UserForm()
         profile_form = UserProfileForm()
@@ -88,7 +88,7 @@ def user_login(request):
                 return HttpResponse("Your Go Fish account has been disabled.")
         else:
             print "Invalid login details: {0}, {1}".format(username, password)
-            return HttpResponse("Invalid login details supplied.")
+            return HttpResponse("Invalid login details supplied. Please go back and try again.")
     else:
         return render_to_response('login.html', {}, context)
 

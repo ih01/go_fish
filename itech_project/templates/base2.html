@@ -69,13 +69,13 @@
 		<ul class="nav nav-list">
 			<li class="nav-header"></li>
 			<div class="jumbotron">
-    <h2> Your Profile!  <br/><br/>
+    <h3> Your Profile!  <br/><br/>
     {{ user.username }}<br/><br/>
-    <p>Your Rod: {{ user_profile.rod.name }} </p>
-    <p>Your Boat: {{ user_profile.boat.name }} </p>
-    <p>Your Bait: {{ user_profile.bait.name }} </p>
+    <p>Your Rod: <br/>{{ user_profile.rod.name }} </p>
+    <p>Your Boat: <br/>{{ user_profile.boat.name }} </p>
+    <p>Your Bait: <br/>{{ user_profile.bait.name }} </p>
     <p>You have {{ user_profile.balance }} gold coins </p>
-    </h2>
+    </h3>
         {% if userprofile.picture %}
             <img src="{{ userprofile.picture.url }}"  />
         {% endif %}
@@ -111,10 +111,13 @@
 <hr>
 
 
+
+
 <div class="navbar navbar-default navbar-bottom">
 <footer>
     <div class="container-fluid">
         <p>&copy; Go Fish Acknowledgements</p>
+        <p>Built using xyz</p>
     </div>
 </footer>
 </div>
