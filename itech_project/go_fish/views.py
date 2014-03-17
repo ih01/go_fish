@@ -176,7 +176,7 @@ def buy(request, item):
     bait_list = get_baitList(user)
     context_dict = {'rods': rod_list, 'boats': boat_list, 'bait': bait_list, 'user_profile': user_profile}
 
-    if user_profile.balance_status is False:
+    if get_balance_status(user) is False:
         return render_to_response('balance_error.html')
     else:
         return render_to_response('shop.html', context_dict, context)

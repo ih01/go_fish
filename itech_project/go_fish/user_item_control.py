@@ -101,5 +101,10 @@ def getBoat(level):
 def getBait(level):
 	return Bait.objects.get(pk=int(level))
 
+#gets users balance status
+def get_balance_status(user):
+    user_prof = get_userProfile(user)
+    return user_prof.balance_status
+
 
 
