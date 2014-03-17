@@ -9,6 +9,18 @@ from models import UserProfile, Rod, Boat, Bait
 #gets the user profile
 def get_userProfile(user):
 	return UserProfile.objects.get(user=user)
+	
+#check for user profile
+def check_user():
+	user_prof = None
+	try:
+		us = request.user
+		user_prof = get_userProfile(us)
+	except:
+		user_prof = None
+	context_dict = {}
+	context_dict ['user_profile']=user_prof
+	return context_dict
 
 
 

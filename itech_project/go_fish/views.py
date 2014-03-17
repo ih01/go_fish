@@ -9,22 +9,21 @@ from django.contrib.auth import logout
 from game_control import *
 from game import MakeGame
 from user_item_control import *
-from models import Rod, Boat, Bait, Game, UserProfile
 from shop import Shop
 from django.contrib.auth.models import User
 
 
 def welcome(request):
 	context = RequestContext(request)
-	user_prof = None
-	try:
-		us = request.user
-		user_prof = get_userProfile(us)
-	except:
-		user_prof = None
-	context_dict = {}
-	context_dict ['user_profile']=user_prof
+	context_dict = check_user()
 	return render_to_response('welcome.html', context_dict, context)
+	
+	
+def help(request):
+    context = RequestContext(request)
+    context_dict = check_user()
+    return render_to_response('help.html', context_dict, context)
+
 
 
 # hopefully won't need seperate page for this
@@ -137,18 +136,6 @@ def move(request, moveTo):
     context_dict ['coords']=coords
     return render_to_response('Play.html', context_dict, context)
 
-
-def help(request):
-    context = RequestContext(request)
-    user_prof = None
-    try:
-	us = request.user
-	user_prof = get_userProfile(us)
-    except:
-	user_prof = None
-    context_dict = {}
-    context_dict ['user_profile']=user_prof
-    return render_to_response('help.html', context_dict, context)
 
 
 @login_required
