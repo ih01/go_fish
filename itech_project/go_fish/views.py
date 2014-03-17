@@ -14,16 +14,15 @@ from django.contrib.auth.models import User
 
 
 def welcome(request):
-	context = RequestContext(request)
-	context_dict = check_user(request)
-	return render_to_response('welcome.html', context_dict, context)
-	
-	
+    context = RequestContext(request)
+    context_dict = check_user(request)
+    return render_to_response('welcome.html', context_dict, context)
+
+
 def help(request):
     context = RequestContext(request)
     context_dict = check_user(request)
     return render_to_response('help.html', context_dict, context)
-
 
 
 # hopefully won't need seperate page for this
@@ -51,8 +50,8 @@ def register(request):
             profile.bait = initial_bait
             profile.user = user
             new_game(user)
-          #  if 'picture' in request.FILES:
-               #profile.picture = request.FILES['picture']
+            #  if 'picture' in request.FILES:
+            #profile.picture = request.FILES['picture']
             profile.save()
             registered = True
             #log newly registered user in straight away
@@ -73,7 +72,7 @@ def register(request):
 
 def user_login(request):
     context = RequestContext(request)
-    user_prof=None
+    user_prof = None
 
     if request.method == 'POST':
         username = request.POST['username']
@@ -138,20 +137,19 @@ def move(request, moveTo):
     return render_to_response('Play.html', context_dict, context)
 
 
-
 @login_required
 def shop(request):
-	context = RequestContext(request)
-	us=request.user
-	game = load_game(us)
-	fishToMoney(us, game)
-	save_game(us, game)
-	user_profile = get_userProfile(us)
-	rod_list = get_rodList(us)
-	boat_list = get_boatList(us)
-	bait_list = get_baitList(us)
-	context_dict = {'rods': rod_list, 'boats': boat_list, 'bait': bait_list, 'user_profile': user_profile}
-	return render_to_response('shop.html', context_dict, context)
+    context = RequestContext(request)
+    us = request.user
+    game = load_game(us)
+    fishToMoney(us, game)
+    save_game(us, game)
+    user_profile = get_userProfile(us)
+    rod_list = get_rodList(us)
+    boat_list = get_boatList(us)
+    bait_list = get_baitList(us)
+    context_dict = {'rods': rod_list, 'boats': boat_list, 'bait': bait_list, 'user_profile': user_profile}
+    return render_to_response('shop.html', context_dict, context)
 
 
 @login_required
@@ -178,25 +176,28 @@ def buy(request, item):
     bait_list = get_baitList(user)
     context_dict = {'rods': rod_list, 'boats': boat_list, 'bait': bait_list, 'user_profile': user_profile}
 
-    return render_to_response('shop.html', context_dict, context)
+    if user_profile.balance_status is False:
+        return render_to_response('balance_error.html')
+    else:
+        return render_to_response('shop.html', context_dict, context)
 
 
 @login_required
 def profile(request):
-	context = RequestContext(request)
-	context_dict = {}
-	#u = User.objects.get(username=request.user)
-	u = request.user
+    context = RequestContext(request)
+    context_dict = {}
+    #u = User.objects.get(username=request.user)
+    u = request.user
 
-	try:
+    try:
         #up = UserProfile.objects.get(user=u)
-		up = get_userProfile(u)
-	except:
-		up = None
+        up = get_userProfile(u)
+    except:
+        up = None
 
-	context_dict['user'] = u
-	context_dict['user_profile'] = up
-	return render_to_response('profile.html', context_dict, context)
+    context_dict['user'] = u
+    context_dict['user_profile'] = up
+    return render_to_response('profile.html', context_dict, context)
 
 
 @login_required

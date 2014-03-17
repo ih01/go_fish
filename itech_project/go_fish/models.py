@@ -36,6 +36,7 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User)
     fishAmount = models.IntegerField(default=0)
     balance = models.IntegerField(default=0)
+    balance_status = models.BooleanField(default=1)
     rod = models.ForeignKey(Rod)
     boat = models.ForeignKey(Boat)
     bait = models.ForeignKey(Bait)
