@@ -32,7 +32,7 @@ def register(request):
     if request.method == 'POST':
         #try to get info from raw form
         user_form = UserForm(data=request.POST)
-       # profile_form = UserProfileForm(data=request.POST)
+        profile_form = UserProfileForm(data=request.POST)
         #if valid
         if user_form.is_valid() and profile_form.is_valid():
             user = user_form.save()
