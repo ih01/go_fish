@@ -11,7 +11,7 @@ from game import MakeGame
 from user_item_control import *
 from shop import Shop
 from django.contrib.auth.models import User
-
+import math
 
 def welcome(request):
     context = RequestContext(request)
@@ -100,41 +100,47 @@ def user_logout(request):
 
 @login_required
 def play(request):
-    context = RequestContext(request)
-    us = request.user
-    user_prof = get_userProfile(us)
-    game = load_game(us)
-    coords = str(game.get_X()) + "_" + str(game.get_Y())
-    return render_to_response('Play.html', {'user_profile': user_prof, 'game': game, 'coords': coords}, context)
+	context = RequestContext(request)
+	us = request.user
+	user_prof = get_userProfile(us)
+	game = load_game(us)
+	coords = str(game.get_X()) + "_" + str(game.get_Y())
+	game_hours = int(math.floor(game.time_left/60))
+	game_minutes = int(game.time_left%60)
+	return render_to_response('Play.html', {'game_hours': game_hours, 'game_minutes': game_minutes, 'user_profile': user_prof, 'game': game, 'coords': coords}, context)
 
 
 @login_required
 def move(request, moveTo):
-    context = RequestContext(request)
-    context_dict = {}
-    context_dict['moveTo'] = moveTo
-    us = request.user
-    game = load_game(us)
-    moveX = int(moveTo[0])
-    moveY = int(moveTo[2])
-    if moveX == game.get_X() and moveY == game.get_Y():
-        baitMod = get_baitMod(us)
-        rodMod = get_rodMod(us)
-        fishCaught = game.fish(rodMod, baitMod)
-    else:
-        boatMod = get_boatMod(us)
-        game.move(moveX, moveY, boatMod)
-        fishCaught = 0
-    context_dict['fishCaught'] = fishCaught
-    save_game(us, game)
-    game_over = check_end_game(us, game)
-    context_dict['game'] = game
-    context_dict['Game_Over'] = game_over
-    coords = str(game.get_X()) + "_" + str(game.get_Y())
-    user_prof = get_userProfile(us)
-    context_dict['user_profile'] = user_prof
-    context_dict['coords'] = coords
-    return render_to_response('Play.html', context_dict, context)
+	context = RequestContext(request)
+	context_dict = {}
+	context_dict['moveTo'] = moveTo
+	us = request.user
+	game = load_game(us)
+	moveX = int(moveTo[0])
+	moveY = int(moveTo[2])
+	if moveX == game.get_X() and moveY == game.get_Y():
+		baitMod = get_baitMod(us)
+		rodMod = get_rodMod(us)
+		fishCaught = game.fish(rodMod, baitMod)
+	else:
+		boatMod = get_boatMod(us)
+		game.move(moveX, moveY, boatMod)
+		fishCaught = 0
+	context_dict['fishCaught'] = fishCaught
+	save_game(us, game)
+	game_over = check_end_game(us, game)
+	context_dict['game'] = game
+	context_dict['Game_Over'] = game_over
+	coords = str(game.get_X()) + "_" + str(game.get_Y())
+	user_prof = get_userProfile(us)
+	game_hours = int(math.floor(game.time_left/60))
+	game_minutes = int(game.time_left%60)
+	context_dict['user_profile'] = user_prof
+	context_dict['game_hours'] = game_hours
+	context_dict['game_minutes'] = game_minutes
+	context_dict['coords'] = coords
+	return render_to_response('Play.html', context_dict, context)
 
 
 @login_required
