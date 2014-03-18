@@ -30,7 +30,7 @@
           <ul class="nav navbar-nav">
            
             {% if user.is_authenticated %}
-             <li> Welcome {{ user.username}}!</li>
+                <li> <a class="navbar-brand" href=''>Welcome {{ user.username}}! </a></li>
              <li><a href="/">Home</a></li>
              <li><a href="/play">Play</a></li>
             <li><a href="/shop">Shop</a></li>
@@ -38,7 +38,7 @@
              <li><a href="/logout">Sign Out</a></li>
 
         {% else %}
-             <li> <a>Welcome Stranger! </a></li>
+             <li> <a class="navbar-brand" href=''>Welcome Stranger! </a></li>
              <li ><a href="/">Home</a></li>
              <li ><a href="/help">Help</a></li>
             <li ><a href="/login">Sign In</a></li>
@@ -58,12 +58,12 @@
  {% if user_profile %}
         <div class="row">
           <div class="col-lg-14">
-           <div class="jumbotron">
+           <div class="well jumbotron">
 
         <center>
 <h4>
 Your Rod: {{ user_profile.rod.name }} - Your Boat: {{ user_profile.boat.name }} - Your Bait: {{ user_profile.bait.name }}
-- You have {{ user_profile.balance }} gold coins
+<br/> You have {{ user_profile.balance }} gold coins
     </h4>
 </center>
 </div>
