@@ -64,22 +64,19 @@
  {% if user_profile %}
         <center>
 <h4>
-Your Rod: {{ user_profile.rod.name }} - Your Boat: {{ user_profile.boat.name }} - Your Bait: {{ user_profile.bait.name }} 
-You have {{ user_profile.balance }} gold coins 
+Your Rod: {{ user_profile.rod.name }} - Your Boat: {{ user_profile.boat.name }} - Your Bait: {{ user_profile.bait.name }}
+You have {{ user_profile.balance }} gold coins
     </h4>
-        {% if userprofile.picture %}
-            <img src="{{ userprofile.picture.url }}" />
-        {% endif %}
 </center>
 </div>
 </ul>
 
-</div>
 
-</div>
   {% endif %}
 {% endif %}
+</div>
 
+</div>
 
 
 
@@ -98,7 +95,7 @@ You have {{ user_profile.balance }} gold coins
          
             {% block body_block %}
             {% endblock %}
-	  
+
         </div>
     </div>
   </div>
