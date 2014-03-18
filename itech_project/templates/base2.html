@@ -30,7 +30,7 @@
           <ul class="nav navbar-nav">
            
             {% if user.is_authenticated %}
-             <li> <a href='profile'>Welcome {{ user.username}}!</a></li>
+             <li> Welcome {{ user.username}}!</li>
              <li><a href="/">Home</a></li>
              <li><a href="/play">Play</a></li>
             <li><a href="/shop">Shop</a></li>
@@ -83,7 +83,7 @@ Your Rod: {{ user_profile.rod.name }} - Your Boat: {{ user_profile.boat.name }} 
 
 
 
-<div class="container-fluid">
+<div class="container-fluid" style="max-width:800px">
     <div class="row-fluid">
      {% if user.is_authenticated %}
         <div class="span5">
@@ -112,5 +112,4 @@ Your Rod: {{ user_profile.rod.name }} - Your Boat: {{ user_profile.boat.name }} 
 
 </body>
 
-</footer>
 </html>
