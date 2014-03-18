@@ -85,9 +85,9 @@ def populate():
     modDescriptor = "4")
 
 # Sample User Data
-
-	player1=add_player("Fischer Mann", "Test", rod1, boat2, bait1, "600")
-	player2=add_player("Salty Sea Dog", "Test", rod4, boat4, bait3, "5000")
+    #commented out as could not get sample users to work work with the game
+	#player1=add_player("Fischer Mann", "Test", rod1, boat2, bait1, "600")
+	#player2=add_player("Salty Sea Dog", "Test", rod4, boat4, bait3, "5000")
 	
   
 def add_rod(name, level, cost, fishMod, modDescriptor):
