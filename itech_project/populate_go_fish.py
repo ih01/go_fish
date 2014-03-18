@@ -89,12 +89,6 @@ def populate():
 	player1=add_player("Fischer Mann", "Test", rod1, boat2, bait1, "600")
 	player2=add_player("Salty Sea Dog", "Test", rod4, boat4, bait3, "5000")
 	
-
-# Sample game Data
-
-	add_game(player1, "yjcfck")
-	add_game(player2, "lhjb")
-	
   
 def add_rod(name, level, cost, fishMod, modDescriptor):
     r = Rod.objects.get_or_create(name=name, level=level, cost=cost, fishMod=fishMod, modDescriptor=modDescriptor)[0]
