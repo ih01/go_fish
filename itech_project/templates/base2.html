@@ -27,22 +27,33 @@
           </button>
         </div>
         <div class="navbar-collapse collapse" id="navbar-main">
-          <ul class="nav navbar-nav">
+
            
             {% if user.is_authenticated %}
-                <li> <a class="navbar-brand" href='/profile'>Welcome {{ user.username}}! </a></li>
+                 <ul class="nav navbar-nav">
+                <li class="navbar-brand"> Welcome {{ user.username}}! </li>
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
              <li><a href="/">Home</a></li>
              <li><a href="/play">Play</a></li>
             <li><a href="/shop">Shop</a></li>
             <li><a href="/profile">Profile</a></li>
              <li><a href="/help">Help</a></li>
              <li><a href="/logout">Sign Out</a></li>
+                </ul>
 
         {% else %}
-             <li> <a class="navbar-brand" href=''>Welcome Stranger! </a></li>
+                <ul class="nav navbar-nav">
+                <li class="navbar-brand">Welcome Stranger!</li>
+                </ul>
+
+             <ul class="nav navbar-nav navbar-right">
              <li ><a href="/">Home</a></li>
              <li ><a href="/help">Help</a></li>
-            <li ><a href="/login">Sign In</a></li>
+             <li ><a href="/register">Register</a></li>
+             <li ><a href="/login">Sign In</a></li>
+             </ul>
         {% endif %}
         
           </ul>
