@@ -1,27 +1,27 @@
-  <!DOCTYPE html>
+ <!DOCTYPE html>
 {% extends 'base2.html' %}
 {% block title %}{% endblock %}
 {% block body_block %}
 {% if Game_Over %}
 <center>
 <div class="hero-unit" style="background-color:white !important; ">
-	
+
 <br/>
          <div class="jumbotron">
    {% load static %}
 
        <h1>Day Over!</h1>
-	
-	   </div>
+
+</div>
 </div>
 </center>
 {% else %}
 
 <div class="hero-unit" style="background-color:white !important;">
 
-	
+
          <div class="jumbotron">
-	<h3 style="float:right;">Time Left: {{ game.time_left}} 
+<h3 style="float:right;">Time Left: {{ game.time_left}}
 {% if moveTo %}
 <br/>
 You just caught {{ fishCaught }} fish
@@ -33,23 +33,23 @@ You have {{ game.fishTotal }} fish in your stock
 
 <table border="0.1" color="white">
 {% for i in "01234" %}
-	{% with is=i|stringformat:"s" %}
+{% with is=i|stringformat:"s" %}
     <tr>
-	{% for j in "01234" %}
-	{% with js=j|stringformat:"s" %}
-	{% with ""|add:is|add:"_"|add:js as joined %}
-        {% ifequal coords  joined %}<td height="50px" width="50px" ><a href="/go_fish/move/{{ joined }}"><img src="{% static "smallboat.gif" %}" alt="Picture of boat" id="boat"/></a></td> {% else %} <td height="50px" width="50px"><a href="/go_fish/move/{{ joined }}"></a></td> {% endifequal %}
-	{% endwith %}
-	{% endwith %}
+{% for j in "01234" %}
+{% with js=j|stringformat:"s" %}
+{% with ""|add:is|add:"_"|add:js as joined %}
+        {% ifequal coords joined %}<td height="50px" width="50px" ><a href="/go_fish/move/{{ joined }}"><img src="{% static "smallboat.gif" %}" alt="Picture of boat" id="boat"/></a></td> {% else %} <td height="50px" width="50px"><a href="/go_fish/move/{{ joined }}"></a></td> {% endifequal %}
+{% endwith %}
+{% endwith %}
     {% endfor %}
-	{% endwith %}
-	</tr>
+{% endwith %}
+</tr>
 {% endfor %}
 </table>
 
 <br/>
 </center>
-	</div>
+</div>
 
 </div>
 

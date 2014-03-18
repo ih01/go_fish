@@ -3,69 +3,67 @@
 
 <html>
 <head>
+   
+      <script src="../bower_components/html5shiv/dist/html5shiv.js"></script>
+      <script src="../bower_components/respond/dest/respond.min.js"></script>
+  
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap -->
-    <link href="{% static 'css/bootstrap-fluid-adj.css'%} " rel="stylesheet">
     <link href="{% static 'css/bootswatch.min.css'%} " rel="stylesheet" media="screen">
-    <link href="{% static 'css/bootstrap-responsive.css' %}" rel="stylesheet">
 <link href="{% static 'css/table.css' %}" rel="stylesheet">
     <title>Go Fish! {% block title %}{% endblock %}</title>
 
 </head>
 <body>
-
-
-
-
-<div class="navbar navbar-default navbar-fixed-top">
-  <div class="navbar-header">
-    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-    </button>
-
-
-  </div>
-  <div class="navbar-collapse collapse navbar-responsive-collapse">
-
-             <div class="navbar-inner">
-        <div class="container">
-          <img src="{% static "top_logo.gif" %}" alt="Picture of logo" />
-
-
-
-    </ul>
-
-    <ul class="nav navbar-nav navbar-right" >
-
-         {% if user.is_authenticated %}
-              <a class="navbar-brand" href='profile'>Welcome {{ user.username}}! </a>
-             <li class="active"><a href="/">Home</a></li>
-             <li class="active"><a href="/play">Play</a></li>
-            <li class="active"><a href="/shop">Shop</a></li>
-             <li class="active"><a href="/help">Help</a></li>
-             <li class="active"><a href="/logout">Sign Out</a></li>
+<center>
+    <div class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <img class="navbar-brand" src="{% static "top_logo.gif" %}" alt="Picture of logo" />
+          <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+        <div class="navbar-collapse collapse" id="navbar-main">
+          <ul class="nav navbar-nav">
+           
+            {% if user.is_authenticated %}
+             <li> <a href='profile'>Welcome {{ user.username}}!</a></li>
+             <li><a href="/">Home</a></li>
+             <li><a href="/play">Play</a></li>
+            <li><a href="/shop">Shop</a></li>
+             <li><a href="/help">Help</a></li>
+             <li><a href="/logout">Sign Out</a></li>
 
         {% else %}
-             <a class="navbar-brand" href="">Welcome Stranger! </a>
-             <li class="active"><a href="/">Home</a></li>
-             <li class="active"><a href="/help">Help</a></li>
-            <li class="active"><a href="/login">Sign In</a></li>
+             <li> <a>Welcome Stranger! </a></li>
+             <li ><a href="/">Home</a></li>
+             <li ><a href="/help">Help</a></li>
+            <li ><a href="/login">Sign In</a></li>
         {% endif %}
+        
+          </ul>
 
-    </ul>
-  </div>
-</div>
-</div>
-</div>
-<div class="jumbotron">
+        </div>
+      </div>
+    </div>
+
+
+    <div class="container">
+
+      <div class="page-header" id="banner">
          {% if user.is_authenticated %}
  {% if user_profile %}
+        <div class="row">
+          <div class="col-lg-14">
+           <div class="jumbotron">
+
         <center>
 <h4>
 Your Rod: {{ user_profile.rod.name }} - Your Boat: {{ user_profile.boat.name }} - Your Bait: {{ user_profile.bait.name }}
-You have {{ user_profile.balance }} gold coins
+- You have {{ user_profile.balance }} gold coins
     </h4>
 </center>
 </div>
@@ -77,6 +75,10 @@ You have {{ user_profile.balance }} gold coins
 </div>
 
 </div>
+
+           
+        </div>
+      </div>
 
 
 
@@ -104,8 +106,6 @@ You have {{ user_profile.balance }} gold coins
 <hr>
 
 
-
-
 <div class="navbar navbar-default navbar-bottom">
 <footer>
     <div class="container-fluid">
@@ -117,10 +117,9 @@ You have {{ user_profile.balance }} gold coins
 
 
 <hr/>
-
-
-<script src="{% static 'js/jquery-2.0.3.min.js' %}"></script>
+<script src="{% static 'js/jquery-2.1.0.min.js' %}"></script>
 <script src="{% static 'js/bootstrap.min.js' %}"></script>
 <script src="{% static 'js/bootswatch.js' %}"></script>
+</center>
 </body>
 </html>

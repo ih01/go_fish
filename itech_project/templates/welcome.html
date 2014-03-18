@@ -7,13 +7,13 @@
 
 <div class="hero-unit" style="background-color:white !important;">
          <div class="jumbotron" style="background-color:white !important;">
-	<h3 style="float:right;">
-		{% if user.is_authenticated %}
+<h3 style="float:right;">
+{% if user.is_authenticated %}
 
-                  <form><input class="btn btn-primary"  type="button" value="Play" onClick="window.location.href='play'"  style="width:250px !important; height:60px !important; font-size:24px;"></form>
+                  <form><input class="btn btn-primary" type="button" value="Play" onClick="window.location.href='play'" style="width:250px !important; height:60px !important; font-size:24px;"></form>
                   {% else %}
                
-                  <form><input class="btn btn-primary"  type="button" value="Register" onClick="window.location.href='register'"  style="width:250px !important; height:60px !important; font-size:24px;"></form>
+                  <form><input class="btn btn-primary" type="button" value="Register" onClick="window.location.href='register'" style="width:250px !important; height:60px !important; font-size:24px;"></form>
                   {% endif %}
 
                   <br/>
@@ -29,9 +29,6 @@
                   <img src="{% static "logo.gif" %}" alt="Picture of logo" />
 {% endif %}
 </center>
-	</div>
+</div>
 </div>
 {% endblock %}
-
-
-
