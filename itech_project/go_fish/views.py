@@ -24,9 +24,6 @@ def help(request):
     context_dict = check_user(request)
     return render_to_response('help.html', context_dict, context)
 
-
-# hopefully won't need seperate page for this
-
 def register(request):
     context = RequestContext(request)
     profile = None
@@ -35,7 +32,7 @@ def register(request):
     if request.method == 'POST':
         #try to get info from raw form
         user_form = UserForm(data=request.POST)
-        profile_form = UserProfileForm(data=request.POST)
+       # profile_form = UserProfileForm(data=request.POST)
         #if valid
         if user_form.is_valid() and profile_form.is_valid():
             user = user_form.save()
@@ -50,8 +47,6 @@ def register(request):
             profile.bait = initial_bait
             profile.user = user
             new_game(user)
-            #  if 'picture' in request.FILES:
-            #profile.picture = request.FILES['picture']
             profile.save()
             registered = True
             #log newly registered user in straight away
@@ -66,7 +61,7 @@ def register(request):
 
     return render_to_response(
         'register.html',
-        {'user_form': user_form, 'user_profile': profile, 'profile_form': profile_form, 'registered': registered},
+        {'user_form': user_form, 'user_profile': profile, 'registered': registered},
         context)
 
 
@@ -192,11 +187,8 @@ def buy(request, item):
 def profile(request):
     context = RequestContext(request)
     context_dict = {}
-    #u = User.objects.get(username=request.user)
     u = request.user
-
     try:
-        #up = UserProfile.objects.get(user=u)
         up = get_userProfile(u)
     except:
         up = None
@@ -204,8 +196,3 @@ def profile(request):
     context_dict['user'] = u
     context_dict['user_profile'] = up
     return render_to_response('profile.html', context_dict, context)
-
-
-@login_required
-def restricted(request):
-    return HttpResponse("this is restricted...")

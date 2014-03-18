@@ -30,10 +30,11 @@
           <ul class="nav navbar-nav">
            
             {% if user.is_authenticated %}
-                <li> <a class="navbar-brand" href=''>Welcome {{ user.username}}! </a></li>
+                <li> <a class="navbar-brand" href='/profile'>Welcome {{ user.username}}! </a></li>
              <li><a href="/">Home</a></li>
              <li><a href="/play">Play</a></li>
             <li><a href="/shop">Shop</a></li>
+            <li><a href="/profile">Profile</a></li>
              <li><a href="/help">Help</a></li>
              <li><a href="/logout">Sign Out</a></li>
 
@@ -67,16 +68,10 @@ Your Rod: {{ user_profile.rod.name }} - Your Boat: {{ user_profile.boat.name }} 
     </h4>
 </center>
 </div>
-</ul>
-
-
   {% endif %}
 {% endif %}
 </div>
-
 </div>
-
-           
         </div>
       </div>
 
