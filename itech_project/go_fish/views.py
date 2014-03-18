@@ -13,17 +13,19 @@ from shop import Shop
 from django.contrib.auth.models import User
 import math
 
+#Welcome View
 def welcome(request):
     context = RequestContext(request)
-    context_dict = check_user(request)
-    return render_to_response('welcome.html', context_dict, context)
+   # context_dict = check_user(request)
+    return render_to_response('welcome.html', context)
 
-
+#Help View
 def help(request):
     context = RequestContext(request)
-    context_dict = check_user(request)
-    return render_to_response('help.html', context_dict, context)
+    #context_dict = check_user(request)
+    return render_to_response('help.html', context)
 
+#Register View
 def register(request):
     context = RequestContext(request)
     profile = None
@@ -64,7 +66,7 @@ def register(request):
         {'user_form': user_form, 'user_profile': profile, 'registered': registered},
         context)
 
-
+#Logging in View
 def user_login(request):
     context = RequestContext(request)
     user_prof = None
@@ -86,13 +88,13 @@ def user_login(request):
     else:
         return render_to_response('login.html', {}, context)
 
-
+#Log out View
 @login_required
 def user_logout(request):
     logout(request)
     return HttpResponseRedirect("/")
 
-
+#Play View
 @login_required
 def play(request):
 	context = RequestContext(request)
@@ -137,7 +139,7 @@ def move(request, moveTo):
 	context_dict['coords'] = coords
 	return render_to_response('Play.html', context_dict, context)
 
-
+# Shop View
 @login_required
 def shop(request):
     context = RequestContext(request)
@@ -178,11 +180,11 @@ def buy(request, item):
     context_dict = {'rods': rod_list, 'boats': boat_list, 'bait': bait_list, 'user_profile': user_profile}
 
     if get_balance_status(user) is False:
-        return render_to_response('balance_error.html')
+        return render_to_response('balance_error.html', context)
     else:
         return render_to_response('shop.html', context_dict, context)
 
-
+# Profile View
 @login_required
 def profile(request):
     context = RequestContext(request)
@@ -192,7 +194,5 @@ def profile(request):
         up = get_userProfile(u)
     except:
         up = None
-
-    context_dict['user'] = u
     context_dict['user_profile'] = up
     return render_to_response('profile.html', context_dict, context)
