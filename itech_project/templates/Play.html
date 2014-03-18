@@ -40,7 +40,7 @@ You have {{ game.fishTotal }} fish in your stock
 {% for j in "01234" %}
 {% with js=j|stringformat:"s" %}
 {% with ""|add:is|add:"_"|add:js as joined %}
-        {% ifequal coords joined %}<td height="50px" width="50px" ><a href="/go_fish/move/{{ joined }}">{% ifequal user_profile.boat.level 1 %}<img src="{% static "smallboat.gif" %}" alt="Picture of boat" id="boat"/>{% endifequal %}{% ifequal user_profile.boat.level 2 %} <img src="{% static "row.gif" %}" alt="Picture of boat" id="boat"/> {% endifequal %} {% ifequal user_profile.boat.level 3 %} <img src="{% static "motor.gif" %}" alt="Picture of boat" id="boat"/> {% endifequal %} {% ifequal user_profile.boat.level 4 %} <img src="{% static "speed.gif" %}" alt="Picture of boat" id="boat"/> {% endifequal %}</a></td> {% else %} <td height="50px" width="50px"><a href="/go_fish/move/{{ joined }}"></a></td> {% endifequal %}
+        {% ifequal coords joined %}<td height="50px" width="50px" ><a href="/go_fish/move/{{ joined }}">{% ifequal user_profile.boat.level 1 %}<img src="{% static "raft.gif" %}" alt="Picture of boat" id="boat"/>{% endifequal %}{% ifequal user_profile.boat.level 2 %} <img src="{% static "row.gif" %}" alt="Picture of boat" id="boat"/> {% endifequal %} {% ifequal user_profile.boat.level 3 %} <img src="{% static "motor.gif" %}" alt="Picture of boat" id="boat"/> {% endifequal %} {% ifequal user_profile.boat.level 4 %} <img src="{% static "speed.gif" %}" alt="Picture of boat" id="boat"/> {% endifequal %}</a></td> {% else %} <td height="50px" width="50px"><a href="/go_fish/move/{{ joined }}"></a></td> {% endifequal %}
 {% endwith %}
 {% endwith %}
     {% endfor %}
