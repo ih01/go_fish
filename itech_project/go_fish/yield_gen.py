@@ -35,21 +35,26 @@ class yieldGenerator(object):
 			# assign high yield modifier to respective dictionary entry
 			self.map[ (x, y) ] = 7
 			
+			right = x + 1
+			left = x - 1
+			above = y - 1
+			under = y + 1
+			
 			# assign medium yield to adjacent fields (left, right, above, under)
-			if not( ( x + 1 ) > 4 ): 
-				self.map[ (x+1), y] == 4
-			if not( ( x - 1 ) < 0 ): 
-				self.map[ (x-1), y] == 4
-			if not( ( y + 1 ) > 4 ): 
-				self.map[ x, (y+1) ] == 4
-			if not( ( y - 1 ) < 0 ): 
-				self.map[ x, (y-1) ] == 4
+			if ( right < 4 ): 
+				self.map[ (right, y) ] = 4
+			if ( left > 0 ): 
+				self.map[ (left, y) ] = 4
+			if ( under < 4 ): 
+				self.map[ (x, under) ] = 4
+			if ( above > 0 ): 
+				self.map[ (x, above) ] = 4
 	
 	# method which calculates yield, updates the yield field modifier
 	# and returns the yield value
 	def deplete( self, x, y, rodMod, baitMod ):
 		# calculate the yield
-		gain = self.map[ ( x, y ) ] * STDFISH * ( rodMod + baitMod )
+		gain = self.map[ ( x, y ) ] * STDFISH * ( rodMod + baitMod ) + random.randint( 0, 9 )
 		
 		# deplete the field on which fishing has happened
 		if self.map[ ( x , y ) ] == 0:
