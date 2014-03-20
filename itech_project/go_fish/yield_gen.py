@@ -38,7 +38,7 @@ class yieldGenerator(object):
 			# calculate adjacent fields, x or y respectively
 			right = x + 1
 			left = x - 1
-            under = y + 1
+			under = y + 1
 			above = y - 1
 			
 			# assign medium yield to adjacent fields (left, right, above, under)
