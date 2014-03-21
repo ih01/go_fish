@@ -27,10 +27,10 @@ Here are some sample users; both have a lot of money, and the second one has bet
 
 Test Users:
 
-UserName: Fischer Mann
-Password: Test
+UserName: FischerMann
+Password: test
 
-UserName: Salty Sea Dog
-Password: Test
+UserName: SaltySeaDog
+Password: test
 
 
