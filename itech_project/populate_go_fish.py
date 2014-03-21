@@ -118,7 +118,6 @@ def add_player(name, pw, rod1, boat1, bait1, fish):
         up = UserProfile(user=u, fishAmount=fish, rod=rod1, boat=boat1, bait=bait1)
         up.save()
 	new_game(u)
-	u.save()
     return u
 
 # Start execution here!
