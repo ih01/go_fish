@@ -21,8 +21,10 @@
             <ul>
                     {% for Rod in rods %}
                     <li>{{ Rod.name }} <br/>Cost: {{ Rod.cost }} <br/>Catch up to {{ Rod.modDescriptor }}x more fish!
+		     <br/>
                      <br/> <br/><form><input class="btn btn-primary"  type="button" value="Buy" onClick="window.location.href='/buy/{{ Rod.level }}R'"  style="width:75px !important; height:30px !important; font-size:16px;"></form> </li>
                     <br/>
+
                     {% endfor %}
             </ul>
         {% else %}
@@ -41,7 +43,7 @@
                     <li>{{ Boat.name }} <br/>Cost: {{ Boat.cost }} <br/>Move {{ Boat.modDescriptor }}% faster!
                    <br/>
                          {% if Boat.name == "Kayak" %} <img src="{% static "row.gif" %}" alt="Picture of boat"  height="50" width="50"/>
-                        {%elif Boat.name == "Motor boat" %} <img src="{% static "smallboat.gif" %}" alt="Picture of boat"  height="50" width="50"/>
+                        {%elif Boat.name == "Motor boat" %} <img src="{% static "motor.gif" %}" alt="Picture of boat"  height="50" width="50"/>
                         {% elif Boat.name == "Speed boat" %} <img src="{% static "speed.gif" %}" alt="Picture of boat"  height="50" width="50"/> {% endif %}
                         <br/>   <form><input class="btn btn-primary"  type="button" value="Buy" onClick="window.location.href='/buy/{{ Boat.level }}B'"  style="width:75px !important; height:30px !important; font-size:16px;"></form> </li>
                    <br/>
