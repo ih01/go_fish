@@ -4,6 +4,7 @@ from django.core.management import setup_environ
 setup_environ(settings)
 from go_fish.models import Bait, Rod, Boat, UserProfile, Game
 from django.contrib.auth.models import User
+from go_fish.game_control import *
 
 def populate():
    
@@ -84,10 +85,9 @@ def populate():
 	fishMod="4",
     modDescriptor = "4")
 
-# Sample User Data
-    #commented out as could not get sample users to work work with the game
-	#player1=add_player("Fischer Mann", "Test", rod1, boat2, bait1, "600")
-	#player2=add_player("Salty Sea Dog", "Test", rod4, boat4, bait3, "5000")
+#Sample User Data
+	player1=add_player("Fischer Mann", "Test", rod1, boat2, bait1, "6000")
+	player2=add_player("Salty Sea Dog", "Test", rod4, boat4, bait3, "5000")
 	
   
 def add_rod(name, level, cost, fishMod, modDescriptor):
@@ -117,6 +117,8 @@ def add_player(name, pw, rod1, boat1, bait1, fish):
         u.save()
         up = UserProfile(user=u, fishAmount=fish, rod=rod1, boat=boat1, bait=bait1)
         up.save()
+	new_game(u)
+	u.save()
     return u
 
 # Start execution here!
