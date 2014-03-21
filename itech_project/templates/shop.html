@@ -21,10 +21,8 @@
             <ul>
                     {% for Rod in rods %}
                     <li>{{ Rod.name }} <br/>Cost: {{ Rod.cost }} <br/>Catch up to {{ Rod.modDescriptor }}x more fish!
-		     <br/>
                      <br/> <br/><form><input class="btn btn-primary"  type="button" value="Buy" onClick="window.location.href='/buy/{{ Rod.level }}R'"  style="width:75px !important; height:30px !important; font-size:16px;"></form> </li>
                     <br/>
-
                     {% endfor %}
             </ul>
         {% else %}
