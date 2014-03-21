@@ -17,9 +17,7 @@
           <h4>Rods Available:</h4>
         <h5>
 
-        <br/>
-
-       {% if rods %}
+            {% if rods %}
             <ul>
                     {% for Rod in rods %}
                     <li>{{ Rod.name }} <br/>Cost: {{ Rod.cost }} <br/>Catch up to {{ Rod.modDescriptor }}x more fish!
@@ -36,12 +34,16 @@
     <div class="col-md-4">
           <h4>Boats Available:</h4>
         <h5>
-        <br/>
+
           {% if boats %}
             <ul>
                     {% for Boat in boats %}
                     <li>{{ Boat.name }} <br/>Cost: {{ Boat.cost }} <br/>Move {{ Boat.modDescriptor }}% faster!
-                   <br/><br/>   <form><input class="btn btn-primary"  type="button" value="Buy" onClick="window.location.href='/buy/{{ Boat.level }}B'"  style="width:75px !important; height:30px !important; font-size:16px;"></form> </li>
+                   <br/>
+                         {% if Boat.name == "Kayak" %} <img src="{% static "row.gif" %}" alt="Picture of boat"  height="50" width="50"/>
+                        {%elif Boat.name == "Motor boat" %} <img src="{% static "smallboat.gif" %}" alt="Picture of boat"  height="50" width="50"/>
+                        {% elif Boat.name == "Speed boat" %} <img src="{% static "speed.gif" %}" alt="Picture of boat"  height="50" width="50"/> {% endif %}
+                        <br/>   <form><input class="btn btn-primary"  type="button" value="Buy" onClick="window.location.href='/buy/{{ Boat.level }}B'"  style="width:75px !important; height:30px !important; font-size:16px;"></form> </li>
                    <br/>
                     {% endfor %}
             </ul>
@@ -54,12 +56,13 @@
         <div class="col-md-4">
           <h4>Bait Available:</h4>
             <h5>
-            <br/>
+
             {% if bait %}
             <ul>
                     {% for Bait in bait %}
                     <li>{{ Bait.name }} <br/>Cost: {{ Bait.cost }} <br/>Lure up to {{ Bait.modDescriptor }}x more fish!
-                    <br/><br/> <form><input class="btn btn-primary"  type="button" value="Buy" onClick="window.location.href='/buy/{{ Bait.level }}b'"  style="width:75px !important; height:30px !important; font-size:16px;"></form> </li>
+                    <br/>
+                   <br/> <form><input class="btn btn-primary"  type="button" value="Buy" onClick="window.location.href='/buy/{{ Bait.level }}b'"  style="width:75px !important; height:30px !important; font-size:16px;"></form> </li>
                    <br/>
                     {% endfor %}
             </ul>
