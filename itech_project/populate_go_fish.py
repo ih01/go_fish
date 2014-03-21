@@ -106,7 +106,7 @@ def add_game(user, pickledgame):
     g = Game.objects.get_or_create(user=user, pickledgame=pickledgame)[0]
     return g
 
-def add_player(name, pw, rod1, boat1, bait1, fish):
+def add_player(name, pw, rod1, boat1, bait1, balance):
 
     email = '{0}@{1}.com'.format(name,name)
     try:
@@ -115,7 +115,7 @@ def add_player(name, pw, rod1, boat1, bait1, fish):
         u = User(username=name, email=email)
         u.set_password(pw)
         u.save()
-        up = UserProfile(user=u, fishAmount=fish, rod=rod1, boat=boat1, bait=bait1)
+        up = UserProfile(user=u, balance=balance, rod=rod1, boat=boat1, bait=bait1)
         up.save()
 	new_game(u)
     return u
