@@ -74,7 +74,13 @@
 
         <center>
 <h4>
-Rod: {{ user_profile.rod.name }} - Boat: {{ user_profile.boat.name }} - Bait: {{ user_profile.bait.name }}
+Rod: {{ user_profile.rod.name }} {% if user_profile.rod.name == "Wooden Fishing Rod" %} <img src="{% static "rod1.png" %}" alt="Picture of rod1"  height="50" width="50"/> {% elif user_profile.rod.name == "Iron Fishing Rod" %} <img src="{% static "rod2.png" %}" alt="Picture of rod2"  height="50" width="50"/>
+                        {%elif user_profile.rod.name == "Steel Fishing Rod" %} <img src="{% static "rod3.png" %}" alt="Picture of rod3"  height="50" width="50"/>
+                        {% elif user_profile.rod.name == "Mithril Fishing Rod" %} <img src="{% static "rod4.png" %}" alt="Picture of boat"  height="50" width="50"/> {% endif %} - Boat: {{ user_profile.boat.name }} {% if user_profile.boat.name == "Raft" %} <img src="{% static "raft.gif" %}" alt="Picture of boat"  height="50" width="50"/> {% elif user_profile.boat.name == "Kayak" %} <img src="{% static "row.gif" %}" alt="Picture of boat"  height="50" width="50"/>
+                        {%elif user_profile.boat.name == "Motor boat" %} <img src="{% static "motor.gif" %}" alt="Picture of boat"  height="50" width="50"/>
+                        {% elif user_profile.boat.name == "Speed boat" %} <img src="{% static "speed.gif" %}" alt="Picture of boat"  height="50" width="50"/> {% endif %} - Bait: {{ user_profile.bait.name }} {% if user_profile.bait.name == "Worm" %} <img src="{% static "bait1.png" %}" alt="Picture of bait1"  height="50" width="50"/> {% elif user_profile.bait.name == "Basic Lure" %} <img src="{% static "bait2.png" %}" alt="Picture of bait2"  height="50" width="50"/>
+                        {%elif user_profile.bait.name == "Advanced Lure" %} <img src="{% static "bait3.png" %}" alt="Picture of bait3"  height="50" width="50"/>
+                        {% elif user_profile.bait.name == "Bucket O'Bait" %} <img src="{% static "bait4.png" %}" alt="Picture of bait4"  height="50" width="50"/> {% endif %}
 <br/> You have {{ user_profile.balance }} gold coins  <a href = /shop> Click here to Shop! </a>
 </h4>
 </center>

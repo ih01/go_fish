@@ -22,9 +22,9 @@
                     {% for Rod in rods %}
                     <li>{{ Rod.name }} <br/>Cost: {{ Rod.cost }} <br/>Catch up to {{ Rod.modDescriptor }}x more fish!
                      <br/>
-                        {% if Rod.name == "Iron Fishing Rod" %} <img src="{% static "rod2.gif" %}" alt="Picture of rod2"  height="50" width="50"/>
-                        {%elif Rod.name == "Steel Fishing Rod" %} <img src="{% static "rod3.gif" %}" alt="Picture of rod3"  height="50" width="50"/>
-                        {% elif Rod.name == "Mithril Fishing Rod" %} <img src="{% static "rod4.gif" %}" alt="Picture of boat"  height="50" width="50"/> {% endif %}
+                        {% if Rod.name == "Iron Fishing Rod" %} <img src="{% static "rod2.png" %}" alt="Picture of rod2"  height="50" width="50"/>
+                        {%elif Rod.name == "Steel Fishing Rod" %} <img src="{% static "rod3.png" %}" alt="Picture of rod3"  height="50" width="50"/>
+                        {% elif Rod.name == "Mithril Fishing Rod" %} <img src="{% static "rod4.png" %}" alt="Picture of boat"  height="50" width="50"/> {% endif %}
                      <br/><form><input class="btn btn-primary"  type="button" value="Buy" onClick="window.location.href='/buy/{{ Rod.level }}R'"  style="width:75px !important; height:30px !important; font-size:16px;"></form> </li>
                     <br/>
                     {% endfor %}
@@ -66,9 +66,9 @@
                     {% for Bait in bait %}
                     <li>{{ Bait.name }} <br/>Cost: {{ Bait.cost }} <br/>Lure up to {{ Bait.modDescriptor }}x more fish!
                     <br/>
-                        {% if Bait.name == "Basic Lure" %} <img src="{% static "bait2.gif" %}" alt="Picture of bait2"  height="50" width="50"/>
-                        {%elif Bait.name == "Advanced Lure" %} <img src="{% static "bait3.gif" %}" alt="Picture of bait3"  height="50" width="50"/>
-                        {% elif Bait.name == "Bucket O'Bait" %} <img src="{% static "bait4.gif" %}" alt="Picture of bait4"  height="50" width="50"/> {% endif %}
+                        {% if Bait.name == "Basic Lure" %} <img src="{% static "bait2.png" %}" alt="Picture of bait2"  height="50" width="50"/>
+                        {%elif Bait.name == "Advanced Lure" %} <img src="{% static "bait3.png" %}" alt="Picture of bait3"  height="50" width="50"/>
+                        {% elif Bait.name == "Bucket O'Bait" %} <img src="{% static "bait4.png" %}" alt="Picture of bait4"  height="50" width="50"/> {% endif %}
                    <br/> <form><input class="btn btn-primary"  type="button" value="Buy" onClick="window.location.href='/buy/{{ Bait.level }}b'"  style="width:75px !important; height:30px !important; font-size:16px;"></form> </li>
                    <br/>
                     {% endfor %}

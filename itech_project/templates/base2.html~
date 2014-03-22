@@ -15,7 +15,7 @@
 
 </head>
 <body>
-<center>
+
     <div class="navbar navbar-default navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
@@ -27,21 +27,33 @@
           </button>
         </div>
         <div class="navbar-collapse collapse" id="navbar-main">
-          <ul class="nav navbar-nav">
+
            
             {% if user.is_authenticated %}
-             <li> <a href='profile'>Welcome {{ user.username}}!</a></li>
+                 <ul class="nav navbar-nav">
+                <li class="navbar-brand"> Welcome {{ user.username}}! </li>
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
              <li><a href="/">Home</a></li>
              <li><a href="/play">Play</a></li>
             <li><a href="/shop">Shop</a></li>
+            <li><a href="/profile">Profile</a></li>
              <li><a href="/help">Help</a></li>
              <li><a href="/logout">Sign Out</a></li>
+                </ul>
 
         {% else %}
-             <li> <a>Welcome Stranger! </a></li>
+                <ul class="nav navbar-nav">
+                <li class="navbar-brand">Welcome Stranger!</li>
+                </ul>
+
+             <ul class="nav navbar-nav navbar-right">
              <li ><a href="/">Home</a></li>
              <li ><a href="/help">Help</a></li>
-            <li ><a href="/login">Sign In</a></li>
+             <li ><a href="/register">Register</a></li>
+             <li ><a href="/login">Sign In</a></li>
+             </ul>
         {% endif %}
         
           </ul>
@@ -49,7 +61,7 @@
         </div>
       </div>
     </div>
-
+<center>
 
     <div class="container">
 
@@ -58,32 +70,32 @@
  {% if user_profile %}
         <div class="row">
           <div class="col-lg-14">
-           <div class="jumbotron">
+           <div class="well jumbotron">
 
         <center>
 <h4>
-Your Rod: {{ user_profile.rod.name }} - Your Boat: {{ user_profile.boat.name }} - Your Bait: {{ user_profile.bait.name }}
-You have {{ user_profile.balance }} gold coins
-    </h4>
+Rod: {{ user_profile.rod.name }} {% if user_profile.rod.name == "Wooden Fishing Rod" %} <img src="{% static "rod1.png" %}" alt="Picture of rod1"  height="50" width="50"/> {% elif user_profile.rod.name == "Iron Fishing Rod" %} <img src="{% static "rod2.png" %}" alt="Picture of rod2"  height="50" width="50"/>
+                        {%elif user_profile.rod.name == "Steel Fishing Rod" %} <img src="{% static "rod3.png" %}" alt="Picture of rod3"  height="50" width="50"/>
+                        {% elif user_profile.rod.name == "Mithril Fishing Rod" %} <img src="{% static "rod4.png" %}" alt="Picture of boat"  height="50" width="50"/> {% endif %} - Boat: {{ user_profile.boat.name }} {% if user_profile.boat.name == "Raft" %} <img src="{% static "raft.gif" %}" alt="Picture of boat"  height="50" width="50"/> {% elif user_profile.boat.name == "Kayak" %} <img src="{% static "row.gif" %}" alt="Picture of boat"  height="50" width="50"/>
+                        {%elif user_profile.boat.name == "Motor boat" %} <img src="{% static "motor.gif" %}" alt="Picture of boat"  height="50" width="50"/>
+                        {% elif user_profile.boat.name == "Speed boat" %} <img src="{% static "speed.gif" %}" alt="Picture of boat"  height="50" width="50"/> {% endif %} - Bait: {{ user_profile.bait.name }} {% if user_profile.bait.name == "Basic Lure" %} <img src="{% static "bait1.png" %}" alt="Picture of bait2"  height="50" width="50"/> {% elif user_profile.bait.name == "Basic Lure" %} <img src="{% static "bait2.png" %}" alt="Picture of bait2"  height="50" width="50"/>
+                        {%elif user_profile.bait.name == "Advanced Lure" %} <img src="{% static "bait3.png" %}" alt="Picture of bait3"  height="50" width="50"/>
+                        {% elif user_profile.bait.name == "Bucket O'Bait" %} <img src="{% static "bait4.png" %}" alt="Picture of bait4"  height="50" width="50"/> {% endif %}
+<br/> You have {{ user_profile.balance }} gold coins  <a href = /shop> Click here to Shop! </a>
+</h4>
 </center>
 </div>
-</ul>
-
-
   {% endif %}
 {% endif %}
 </div>
-
 </div>
-
-           
         </div>
       </div>
 
 
 
 
-<div class="container-fluid">
+<div class="container-fluid" style="max-width:800px">
     <div class="row-fluid">
      {% if user.is_authenticated %}
         <div class="span5">
@@ -101,25 +113,15 @@ You have {{ user_profile.balance }} gold coins
         </div>
     </div>
   </div>
+</center>
 
 
-<hr>
 
-
-<div class="navbar navbar-default navbar-bottom">
-<footer>
-    <div class="container-fluid">
-        <p>&copy; Go Fish Acknowledgements</p>
-        <p>Built using xyz</p>
-    </div>
-</footer>
-</div>
-
-
-<hr/>
 <script src="{% static 'js/jquery-2.1.0.min.js' %}"></script>
 <script src="{% static 'js/bootstrap.min.js' %}"></script>
 <script src="{% static 'js/bootswatch.js' %}"></script>
-</center>
+
+
 </body>
+
 </html>
